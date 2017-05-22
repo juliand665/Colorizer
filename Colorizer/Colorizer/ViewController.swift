@@ -9,19 +9,21 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
+	
+	@IBOutlet weak var texturesTableView: NSTableView!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		// Do any additional setup after loading the view.
+		
+		texturesTableView.sizeLastColumnToFit()
 	}
-
+	
 	override var representedObject: Any? {
 		didSet {
-		// Update the view, if already loaded.
+			// Update the view, if already loaded.
+			if let colorSet = representedObject as? ColorSetDocument {
+				
+			}
 		}
 	}
-
-
 }
-

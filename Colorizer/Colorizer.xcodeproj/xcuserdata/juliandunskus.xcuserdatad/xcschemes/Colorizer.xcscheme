@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "959A4A1F1EA111D800E385E9"
+               BlueprintIdentifier = "952828DD1EB9F7F20028149E"
                BuildableName = "Colorizer.app"
                BlueprintName = "Colorizer"
                ReferencedContainer = "container:Colorizer.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "959A4A1F1EA111D800E385E9"
+            BlueprintIdentifier = "952828DD1EB9F7F20028149E"
             BuildableName = "Colorizer.app"
             BlueprintName = "Colorizer"
             ReferencedContainer = "container:Colorizer.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "959A4A1F1EA111D800E385E9"
+            BlueprintIdentifier = "952828DD1EB9F7F20028149E"
             BuildableName = "Colorizer.app"
             BlueprintName = "Colorizer"
             ReferencedContainer = "container:Colorizer.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "959A4A1F1EA111D800E385E9"
+            BlueprintIdentifier = "952828DD1EB9F7F20028149E"
             BuildableName = "Colorizer.app"
             BlueprintName = "Colorizer"
             ReferencedContainer = "container:Colorizer.xcodeproj">
