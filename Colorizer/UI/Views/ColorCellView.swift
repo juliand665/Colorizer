@@ -12,11 +12,12 @@ class ColorCellView: NSTableCellView, LoadedTableCell {
 		document![colorizationPath].name = nameLabel.stringValue
 	}
 	
-	var colorizationPath: DocumentPath<Colorization>! {
-		didSet {
-			document!.observeChanges(as: self, runRightNow: true) { [weak self] in
-				self?.update()
-			}
+	var colorizationPath: DocumentPath<Colorization>!
+	
+	override func viewDidMoveToWindow() {
+		super.viewDidMoveToWindow()
+		document!.observeChanges(as: self, runRightNow: true) { [weak self] in
+			self?.update()
 		}
 	}
 	

@@ -2,7 +2,7 @@
 
 import Cocoa
 
-private protocol OnScreen: class {
+protocol OnScreen {
 	var window: NSWindow? { get }
 }
 

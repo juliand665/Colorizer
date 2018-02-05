@@ -12,11 +12,12 @@ class TextureCellView: NSTableCellView, LoadedTableCell {
 		document![texturePath].name = nameLabel.stringValue
 	}
 	
-	var texturePath: DocumentPath<Texture>! {
-		didSet {
-			document!.observeChanges(as: self, runRightNow: true) { [weak self] in
-				self?.update()
-			}
+	var texturePath: DocumentPath<Texture>!
+	
+	override func viewDidMoveToWindow() {
+		super.viewDidMoveToWindow()
+		document!.observeChanges(as: self, runRightNow: true) { [weak self] in
+			self?.update()
 		}
 	}
 	
