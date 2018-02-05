@@ -35,6 +35,7 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 	
 	var filenameHelpPopover: NSPopover!
 	
+	var colorizationPath: DocumentPath<Colorization>!
 	var colorization: Colorization {
 		get {
 			return document![colorizationPath]
@@ -44,20 +45,14 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 		}
 	}
 	
-	var colorizationPath: DocumentPath<Colorization>! {
-		didSet {
-			document!.observeChanges(as: self, runRightNow: true) { [weak self] in
-				self?.update()
-			}
-		}
-	}
-	
-	override func viewWillAppear() {
-		super.viewWillAppear()
+	override func viewDidAppear() {
+		super.viewDidAppear()
 		filenameHelpPopover = NSPopover()
 		filenameHelpPopover.contentViewController = storyboard!.instantiate(FilenameHelpViewController.self)
 		filenameHelpPopover.behavior = .semitransient
-		update()
+		document!.observeChanges(as: self, runRightNow: true) { [weak self] in
+			self?.update()
+		}
 	}
 	
 	func update() {

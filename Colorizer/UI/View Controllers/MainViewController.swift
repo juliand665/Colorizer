@@ -66,9 +66,9 @@ extension MainViewController: NSOutlineViewDelegate {
 	func outlineViewSelectionDidChange(_ notification: Notification) {
 		let selection = sidebarView.item(atRow: sidebarView.selectedRow)
 		switch selection {
-		case let colorization as Colorization:
+		case (.colors, let index) as (Header, Int):
 			let colorViewController = containedViewController as? ColorizationViewController ?? storyboard!.instantiate()!
-			colorViewController.colorization = colorization
+			colorViewController.colorizationPath = \ColorSetDocument.colorSet.colorizations[index] as ReferenceWritableKeyPath<ColorSetDocument, Colorization>
 			containedViewController = colorViewController
 		default:
 			showHelpViewController()
