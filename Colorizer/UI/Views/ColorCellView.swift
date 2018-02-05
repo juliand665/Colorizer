@@ -16,6 +16,7 @@ class ColorCellView: NSTableCellView, LoadedTableCell {
 	
 	override func viewDidMoveToWindow() {
 		super.viewDidMoveToWindow()
+		guard window != nil else { return }
 		document!.observeChanges(as: self, runRightNow: true) { [weak self] in
 			self?.update()
 		}
