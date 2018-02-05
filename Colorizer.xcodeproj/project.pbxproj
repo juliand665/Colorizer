@@ -14,6 +14,14 @@
 		952828EB1EB9F7F20028149E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 952828E91EB9F7F20028149E /* Main.storyboard */; };
 		952828F31EB9F8090028149E /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952828F21EB9F8090028149E /* ColorSet.swift */; };
 		952828F51EB9F86E0028149E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952828F41EB9F86E0028149E /* Helpers.swift */; };
+		9550A0D0201E87FF00BAF7EE /* ColorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550A0CF201E87FF00BAF7EE /* ColorizationViewController.swift */; };
+		9550A0D2201E8E0300BAF7EE /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550A0D1201E8E0300BAF7EE /* HelpViewController.swift */; };
+		9550A0D4201F728800BAF7EE /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550A0D3201F728800BAF7EE /* Observable.swift */; };
+		956568BB1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956568BA1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift */; };
+		9595EA7A201E5DF700634E8E /* HeaderCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9595EA79201E5DF700634E8E /* HeaderCellView.swift */; };
+		9595EA7C201E5E0900634E8E /* ColorCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9595EA7B201E5E0900634E8E /* ColorCellView.swift */; };
+		9595EA7E201E5E1A00634E8E /* TextureCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9595EA7D201E5E1A00634E8E /* TextureCellView.swift */; };
+		95C76D06202105A9005A72D1 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C76D05202105A9005A72D1 /* SidebarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +34,15 @@
 		952828EC1EB9F7F20028149E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		952828F21EB9F8090028149E /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		952828F41EB9F86E0028149E /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		9550A0CF201E87FF00BAF7EE /* ColorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorizationViewController.swift; sourceTree = "<group>"; };
+		9550A0D1201E8E0300BAF7EE /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		9550A0D3201F728800BAF7EE /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		9550A0D5201F7E4F00BAF7EE /* Colorizer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Colorizer.entitlements; sourceTree = "<group>"; };
+		956568BA1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelPerfectImageView.swift; sourceTree = "<group>"; };
+		9595EA79201E5DF700634E8E /* HeaderCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCellView.swift; sourceTree = "<group>"; };
+		9595EA7B201E5E0900634E8E /* ColorCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCellView.swift; sourceTree = "<group>"; };
+		9595EA7D201E5E1A00634E8E /* TextureCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureCellView.swift; sourceTree = "<group>"; };
+		95C76D05202105A9005A72D1 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +75,57 @@
 		952828E01EB9F7F20028149E /* Colorizer */ = {
 			isa = PBXGroup;
 			children = (
-				952828E11EB9F7F20028149E /* AppDelegate.swift */,
-				952828E31EB9F7F20028149E /* ViewController.swift */,
-				952828E51EB9F7F20028149E /* ColorSetDocument.swift */,
-				952828F21EB9F8090028149E /* ColorSet.swift */,
-				952828F41EB9F86E0028149E /* Helpers.swift */,
+				9550A0D5201F7E4F00BAF7EE /* Colorizer.entitlements */,
+				9550A0D7201F9AE000BAF7EE /* Back End */,
+				9550A0D6201F9AD700BAF7EE /* UI */,
 				952828E71EB9F7F20028149E /* Assets.xcassets */,
-				952828E91EB9F7F20028149E /* Main.storyboard */,
 				952828EC1EB9F7F20028149E /* Info.plist */,
 			);
 			path = Colorizer;
+			sourceTree = "<group>";
+		};
+		9550A0D6201F9AD700BAF7EE /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				952828E91EB9F7F20028149E /* Main.storyboard */,
+				952828E11EB9F7F20028149E /* AppDelegate.swift */,
+				952828F41EB9F86E0028149E /* Helpers.swift */,
+				9550A0D9201F9B5300BAF7EE /* View Controllers */,
+				9550A0D8201F9B3C00BAF7EE /* Views */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		9550A0D7201F9AE000BAF7EE /* Back End */ = {
+			isa = PBXGroup;
+			children = (
+				952828E51EB9F7F20028149E /* ColorSetDocument.swift */,
+				952828F21EB9F8090028149E /* ColorSet.swift */,
+				9550A0D3201F728800BAF7EE /* Observable.swift */,
+			);
+			path = "Back End";
+			sourceTree = "<group>";
+		};
+		9550A0D8201F9B3C00BAF7EE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				95C76D05202105A9005A72D1 /* SidebarView.swift */,
+				9595EA79201E5DF700634E8E /* HeaderCellView.swift */,
+				9595EA7B201E5E0900634E8E /* ColorCellView.swift */,
+				9595EA7D201E5E1A00634E8E /* TextureCellView.swift */,
+				956568BA1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9550A0D9201F9B5300BAF7EE /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				952828E31EB9F7F20028149E /* ViewController.swift */,
+				9550A0D1201E8E0300BAF7EE /* HelpViewController.swift */,
+				9550A0CF201E87FF00BAF7EE /* ColorizationViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,13 +155,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Julian Dunskus";
 				TargetAttributes = {
 					952828DD1EB9F7F20028149E = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = V2EPDFA9PV;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -142,10 +206,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9550A0D2201E8E0300BAF7EE /* HelpViewController.swift in Sources */,
+				9595EA7C201E5E0900634E8E /* ColorCellView.swift in Sources */,
+				9595EA7A201E5DF700634E8E /* HeaderCellView.swift in Sources */,
+				9595EA7E201E5E1A00634E8E /* TextureCellView.swift in Sources */,
+				9550A0D4201F728800BAF7EE /* Observable.swift in Sources */,
 				952828F31EB9F8090028149E /* ColorSet.swift in Sources */,
+				956568BB1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift in Sources */,
 				952828E41EB9F7F20028149E /* ViewController.swift in Sources */,
 				952828E21EB9F7F20028149E /* AppDelegate.swift in Sources */,
 				952828F51EB9F86E0028149E /* Helpers.swift in Sources */,
+				9550A0D0201E87FF00BAF7EE /* ColorizationViewController.swift in Sources */,
+				95C76D06202105A9005A72D1 /* SidebarView.swift in Sources */,
 				952828E61EB9F7F20028149E /* ColorSetDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,7 +246,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -182,7 +256,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -224,7 +302,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -232,7 +312,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -264,9 +348,10 @@
 				DEVELOPMENT_TEAM = V2EPDFA9PV;
 				INFOPLIST_FILE = Colorizer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.juliand665.Colorizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -278,9 +363,10 @@
 				DEVELOPMENT_TEAM = V2EPDFA9PV;
 				INFOPLIST_FILE = Colorizer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.juliand665.Colorizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -303,6 +389,7 @@
 				952828F11EB9F7F20028149E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

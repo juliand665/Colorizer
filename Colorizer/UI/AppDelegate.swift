@@ -1,16 +1,9 @@
-//
-//  AppDelegate.swift
-//  Colorizer
-//
-//  Created by Julian Dunskus on 14.04.17.
 //  Copyright © 2017 Julian Dunskus. All rights reserved.
-//
 
 import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Insert code here to initialize your application
 	}
