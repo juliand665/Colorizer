@@ -2,7 +2,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class MainViewController: NSViewController {
 	@IBOutlet weak var sidebarView: NSOutlineView!
 	@IBOutlet weak var containerView: NSView!
 	
@@ -21,14 +21,6 @@ class ViewController: NSViewController {
 				new.view.autoresizingMask = [.width, .height]
 			}
 		}
-	}
-	
-	var document: ColorSetDocument? {
-		return view.window?.windowController?.document as? ColorSetDocument
-	}
-	
-	var colorSet: ColorSet {
-		return document!.colorSet
 	}
 	
 	override func viewDidLoad() {
@@ -51,7 +43,7 @@ class ViewController: NSViewController {
 	
 	@IBAction func addButtonClicked(_ sender: NSButton) {
 		let new = Colorization(named: "new", low: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).color, high: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).color)
-		colorSet.colorizations.append(new)
+		document!.colorSet.colorizations.append(new)
 		sidebarView.insertItems(at: [colorSet.colorizations.count - 1],
 								inParent: Header.colors,
 								withAnimation: .slideUp)
@@ -70,7 +62,7 @@ class ViewController: NSViewController {
 	}
 }
 
-extension ViewController: NSOutlineViewDelegate {
+extension MainViewController: NSOutlineViewDelegate {
 	func outlineViewSelectionDidChange(_ notification: Notification) {
 		let selection = sidebarView.item(atRow: sidebarView.selectedRow)
 		switch selection {
@@ -92,40 +84,48 @@ extension ViewController: NSOutlineViewDelegate {
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-		if let header = item as? Header {
+		switch item {
+		case let header as Header:
 			let cell = outlineView.dequeue(HeaderCellView.self)!
 			cell.header = header
 			return cell
-		} else if let colorization = item as? Colorization {
+		case (.colors, let index) as (Header, Int):
 			let cell = outlineView.dequeue(ColorCellView.self)!
-			cell.colorization = colorization
+			cell.colorizationPath = \ColorSetDocument.colorSet.colorizations[index] as ReferenceWritableKeyPath<ColorSetDocument, Colorization> // TODO jfc
 			return cell
-		} else if let texture = item as? Texture {
+		case (.textures, let index) as (Header, Int):
 			let cell = outlineView.dequeue(TextureCellView.self)!
-			cell.texture = texture
+			cell.texturePath = \ColorSetDocument.colorSet.textures[index] as ReferenceWritableKeyPath<ColorSetDocument, Texture>
 			return cell
+		default:
+			fatalError()
 		}
-		fatalError()
 	}
 }
 
-extension ViewController: NSOutlineViewDataSource {
+extension MainViewController: NSOutlineViewDataSource {
 	func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-		if item == nil {
+		switch item {
+		case nil:
 			return headers.count
-		} else if let header = item as? Header {
-			return header == .colors ? colorSet.colorizations.count : colorSet.textures.count
+		case Header.colors as Header:
+			return colorSet.colorizations.count
+		case Header.textures as Header:
+			return colorSet.textures.count
+		default:
+			fatalError()
 		}
-		fatalError()
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-		if item == nil {
+		switch item {
+		case nil:
 			return headers[index]
-		} else if let header = item as? Header {
-			return header == .colors ? colorSet.colorizations[index] : colorSet.textures[index]
+		case let header as Header:
+			return (header, index)
+		default:
+			fatalError()
 		}
-		fatalError()
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
@@ -141,7 +141,3 @@ enum Header: String {
 	case colors
 	case textures
 }
-
-// shuts up console messages:
-class WindowController: NSWindowController {}
-class Window: NSWindow {}

@@ -35,9 +35,18 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 	
 	var filenameHelpPopover: NSPopover!
 	
-	var colorization: Colorization! {
+	var colorization: Colorization {
+		get {
+			return document![colorizationPath]
+		}
+		set {
+			document![colorizationPath] = newValue
+		}
+	}
+	
+	var colorizationPath: DocumentPath<Colorization>! {
 		didSet {
-			colorization.observeChanges(as: self, runRightNow: true) { [weak self] in
+			document!.observeChanges(as: self, runRightNow: true) { [weak self] in
 				self?.update()
 			}
 		}
@@ -52,7 +61,7 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 	}
 	
 	func update() {
-		guard isViewLoaded && colorization != nil else { return }
+		guard isViewLoaded && colorizationPath != nil else { return }
 		
 		nameField.stringValue = colorization.name
 		filenameField.stringValue = colorization.filename

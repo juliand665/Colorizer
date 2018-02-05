@@ -8,10 +8,21 @@ class TextureCellView: NSTableCellView, LoadedTableCell {
 	@IBOutlet weak var iconView: NSImageView!
 	@IBOutlet weak var nameLabel: NSTextField!
 	
-	var texture: Texture! {
+	@IBAction func nameEdited(_ sender: NSTextField) {
+		document![texturePath].name = nameLabel.stringValue
+	}
+	
+	var texturePath: DocumentPath<Texture>! {
 		didSet {
-			nameLabel.stringValue = texture.name
-			iconView.image = texture.image
+			document!.observeChanges(as: self, runRightNow: true) { [weak self] in
+				self?.update()
+			}
 		}
+	}
+	
+	func update() { 
+		let texture = document![texturePath]
+		nameLabel.stringValue = texture.name
+		iconView.image = texture.image
 	}
 }

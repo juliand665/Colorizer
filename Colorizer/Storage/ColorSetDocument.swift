@@ -2,15 +2,27 @@
 
 import Cocoa
 
+typealias DocumentPath<T> = ReferenceWritableKeyPath<ColorSetDocument, T>
+
 class ColorSetDocument: NSDocument, Observable {
 	var observers: [Observer: () -> Void] = [:]
 	
 	let encoder = JSONEncoder()
 	let decoder = JSONDecoder()
 	
-	private(set) var colorSet = ColorSet() {
+	var colorSet = ColorSet() {
 		didSet {
-			observeColorSet()
+			updateChangeCount(.changeDone)
+			notifyObservers()
+		}
+	}
+	
+	subscript<T>(_ keyPath: DocumentPath<T>) -> T {
+		get {
+			return self[keyPath: keyPath]
+		}
+		set {
+			self[keyPath: keyPath] = newValue
 		}
 	}
 	
@@ -20,7 +32,6 @@ class ColorSetDocument: NSDocument, Observable {
 	
 	override init() {
 		super.init()
-		observeColorSet() // because didSet isn't called automatically
 	}
 	
 	override func makeWindowControllers() {
@@ -36,11 +47,5 @@ class ColorSetDocument: NSDocument, Observable {
 	
 	override func read(from data: Data, ofType typeName: String) throws {
 		colorSet = try decoder.decode(ColorSet.self, from: data)
-	}
-	
-	func observeColorSet() {
-		colorSet.observeChanges(as: self) { 
-			self.updateChangeCount(.changeDone)
-		}
 	}
 }

@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		952828E21EB9F7F20028149E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952828E11EB9F7F20028149E /* AppDelegate.swift */; };
-		952828E41EB9F7F20028149E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952828E31EB9F7F20028149E /* ViewController.swift */; };
+		952828E41EB9F7F20028149E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952828E31EB9F7F20028149E /* MainViewController.swift */; };
 		952828E61EB9F7F20028149E /* ColorSetDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952828E51EB9F7F20028149E /* ColorSetDocument.swift */; };
 		952828E81EB9F7F20028149E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 952828E71EB9F7F20028149E /* Assets.xcassets */; };
 		952828EB1EB9F7F20028149E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 952828E91EB9F7F20028149E /* Main.storyboard */; };
 		952828F31EB9F8090028149E /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952828F21EB9F8090028149E /* ColorSet.swift */; };
 		952828F51EB9F86E0028149E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952828F41EB9F86E0028149E /* Helpers.swift */; };
+		952EAFF4202905B400988253 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952EAFF3202905B400988253 /* Base.swift */; };
 		9550A0D0201E87FF00BAF7EE /* ColorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550A0CF201E87FF00BAF7EE /* ColorizationViewController.swift */; };
 		9550A0D2201E8E0300BAF7EE /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550A0D1201E8E0300BAF7EE /* HelpViewController.swift */; };
 		9550A0D4201F728800BAF7EE /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550A0D3201F728800BAF7EE /* Observable.swift */; };
@@ -27,13 +28,14 @@
 /* Begin PBXFileReference section */
 		952828DE1EB9F7F20028149E /* Colorizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		952828E11EB9F7F20028149E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		952828E31EB9F7F20028149E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		952828E31EB9F7F20028149E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		952828E51EB9F7F20028149E /* ColorSetDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSetDocument.swift; sourceTree = "<group>"; };
 		952828E71EB9F7F20028149E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		952828EA1EB9F7F20028149E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		952828EC1EB9F7F20028149E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		952828F21EB9F8090028149E /* ColorSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
 		952828F41EB9F86E0028149E /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		952EAFF3202905B400988253 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		9550A0CF201E87FF00BAF7EE /* ColorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorizationViewController.swift; sourceTree = "<group>"; };
 		9550A0D1201E8E0300BAF7EE /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		9550A0D3201F728800BAF7EE /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -76,7 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				9550A0D5201F7E4F00BAF7EE /* Colorizer.entitlements */,
-				9550A0D7201F9AE000BAF7EE /* Back End */,
+				9550A0D7201F9AE000BAF7EE /* Storage */,
 				9550A0D6201F9AD700BAF7EE /* UI */,
 				952828E71EB9F7F20028149E /* Assets.xcassets */,
 				952828EC1EB9F7F20028149E /* Info.plist */,
@@ -96,14 +98,14 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		9550A0D7201F9AE000BAF7EE /* Back End */ = {
+		9550A0D7201F9AE000BAF7EE /* Storage */ = {
 			isa = PBXGroup;
 			children = (
 				952828E51EB9F7F20028149E /* ColorSetDocument.swift */,
 				952828F21EB9F8090028149E /* ColorSet.swift */,
 				9550A0D3201F728800BAF7EE /* Observable.swift */,
 			);
-			path = "Back End";
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		9550A0D8201F9B3C00BAF7EE /* Views */ = {
@@ -121,7 +123,8 @@
 		9550A0D9201F9B5300BAF7EE /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				952828E31EB9F7F20028149E /* ViewController.swift */,
+				952EAFF3202905B400988253 /* Base.swift */,
+				952828E31EB9F7F20028149E /* MainViewController.swift */,
 				9550A0D1201E8E0300BAF7EE /* HelpViewController.swift */,
 				9550A0CF201E87FF00BAF7EE /* ColorizationViewController.swift */,
 			);
@@ -210,10 +213,11 @@
 				9595EA7C201E5E0900634E8E /* ColorCellView.swift in Sources */,
 				9595EA7A201E5DF700634E8E /* HeaderCellView.swift in Sources */,
 				9595EA7E201E5E1A00634E8E /* TextureCellView.swift in Sources */,
+				952EAFF4202905B400988253 /* Base.swift in Sources */,
 				9550A0D4201F728800BAF7EE /* Observable.swift in Sources */,
 				952828F31EB9F8090028149E /* ColorSet.swift in Sources */,
 				956568BB1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift in Sources */,
-				952828E41EB9F7F20028149E /* ViewController.swift in Sources */,
+				952828E41EB9F7F20028149E /* MainViewController.swift in Sources */,
 				952828E21EB9F7F20028149E /* AppDelegate.swift in Sources */,
 				952828F51EB9F86E0028149E /* Helpers.swift in Sources */,
 				9550A0D0201E87FF00BAF7EE /* ColorizationViewController.swift in Sources */,

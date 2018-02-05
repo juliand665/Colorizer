@@ -32,7 +32,7 @@ class SidebarView: NSOutlineView {
 	override func performDragOperation(_ info: NSDraggingInfo) -> Bool {
 		guard let url = pngURL(from: info)
 			else { return false }
-		let controller = window!.contentViewController! as! ViewController
+		let controller = window!.contentViewController! as! MainViewController
 		controller.acceptPNG(at: url)
 		return true
 	}

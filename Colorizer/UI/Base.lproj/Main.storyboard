@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -683,10 +682,10 @@
             </objects>
             <point key="canvasLocation" x="-3" y="313"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController storyboardIdentifier="Color Set View Controller" id="5gI-5U-AMq" customClass="ViewController" customModule="Colorizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Color Set View Controller" id="5gI-5U-AMq" customClass="MainViewController" customModule="Colorizer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="ERx-hH-rdd">
                         <rect key="frame" x="0.0" y="0.0" width="654" height="792"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -702,7 +701,7 @@
                                                 <rect key="frame" x="0.0" y="29" width="163" height="763"/>
                                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="gSO-kE-gXn">
                                                     <rect key="frame" x="0.0" y="0.0" width="163" height="763"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="22" usesAutomaticRowHeights="YES" viewBased="YES" indentationMarkerFollowsCell="NO" outlineTableColumn="jbQ-My-Zg7" id="IPh-gG-U56" customClass="SidebarView" customModule="Colorizer" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="163" height="763"/>

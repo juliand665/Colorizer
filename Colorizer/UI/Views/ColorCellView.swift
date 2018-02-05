@@ -9,26 +9,30 @@ class ColorCellView: NSTableCellView, LoadedTableCell {
 	@IBOutlet weak var nameLabel: NSTextField!
 	
 	@IBAction func nameEdited(_ sender: NSTextField) {
-		colorization.name = nameLabel.stringValue
+		document![colorizationPath].name = nameLabel.stringValue
 	}
 	
-	var colorization: Colorization! {
+	var colorizationPath: DocumentPath<Colorization>! {
 		didSet {
-			colorView.colorization = colorization
-			colorization.observeChanges(as: self, runRightNow: true) { [weak self] in
+			document!.observeChanges(as: self, runRightNow: true) { [weak self] in
 				self?.update()
 			}
 		}
 	}
 	
 	func update() { 
+		let colorization = document![colorizationPath]
 		nameLabel.stringValue = colorization.name
-		colorView.setNeedsDisplay(colorView.bounds)
+		colorView.colorization = colorization
 	}
 }
 
 class ColorizationView: NSView {
-	var colorization: Colorization!
+	var colorization: Colorization! {
+		didSet {
+			setNeedsDisplay(bounds)
+		}
+	}
 	
 	override func draw(_ dirtyRect: NSRect) {
 		let halfW = bounds.width / 2
