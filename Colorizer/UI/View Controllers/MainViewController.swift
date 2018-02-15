@@ -49,6 +49,28 @@ class MainViewController: NSViewController {
 								withAnimation: .slideUp)
 	}
 	
+	@IBAction func removeButtonClicked(_ sender: NSButton) {
+		let selection = sidebarView.selectedRowIndexes
+		(containedViewController as! DocumentObserving).stopObserving()
+		// deselect all
+		sidebarView.selectRowIndexes([], byExtendingSelection: false)
+		// make a copy to commit changes all at once
+		var copy = document!.colorSet
+		// traverse backwards so removing items won't fuck up indices of later items
+		for row in selection.sorted().reversed() {
+			let (header, index) = sidebarView.item(atRow: row) as! (Header, Int)
+			switch header {
+			case .colors:
+				copy.colorizations.remove(at: index)
+			case .textures:
+				copy.textures.remove(at: index)
+			}
+			(sidebarView.view(atColumn: 0, row: row, makeIfNecessary: false) as! DocumentObserving).stopObserving()
+			sidebarView.removeItems(at: [index], inParent: header, withAnimation: .slideLeft)
+		}
+		document!.colorSet = copy
+	}
+	
 	func acceptPNG(at url: URL) {
 		let new = Texture(at: url)
 		document!.colorSet.textures.append(new)
@@ -60,6 +82,11 @@ class MainViewController: NSViewController {
 	func showHelpViewController() {
 		containedViewController = storyboard!.instantiate(HelpViewController.self)!
 	}
+	
+	enum Header: String {
+		case colors
+		case textures
+	}
 }
 
 extension MainViewController: NSOutlineViewDelegate {
@@ -67,9 +94,13 @@ extension MainViewController: NSOutlineViewDelegate {
 		let selection = sidebarView.item(atRow: sidebarView.selectedRow)
 		switch selection {
 		case (.colors, let index) as (Header, Int):
-			let colorViewController = containedViewController as? ColorizationViewController ?? storyboard!.instantiate()!
-			colorViewController.colorizationPath = \ColorSetDocument.colorSet.colorizations[index] as ReferenceWritableKeyPath<ColorSetDocument, Colorization>
-			containedViewController = colorViewController
+			let viewController = containedViewController as? ColorizationViewController ?? storyboard!.instantiate()!
+			viewController.colorizationPath = \.colorSet.colorizations[index] as DocumentPath<Colorization>
+			containedViewController = viewController
+		case (.textures, let index) as (Header, Int):
+			let viewController = containedViewController as? TextureViewController ?? storyboard!.instantiate()!
+			viewController.texturePath = \.colorSet.textures[index] as DocumentPath<Texture>
+			containedViewController = viewController
 		default:
 			showHelpViewController()
 		}
@@ -90,12 +121,12 @@ extension MainViewController: NSOutlineViewDelegate {
 			cell.header = header
 			return cell
 		case (.colors, let index) as (Header, Int):
-			let cell = outlineView.dequeue(ColorCellView.self)!
-			cell.colorizationPath = \ColorSetDocument.colorSet.colorizations[index] as ReferenceWritableKeyPath<ColorSetDocument, Colorization> // TODO jfc
+			let cell = outlineView.dequeue(ColorizationCellView.self)!
+			cell.colorizationPath = \.colorSet.colorizations[index] as DocumentPath<Colorization> // TODO jfc
 			return cell
 		case (.textures, let index) as (Header, Int):
 			let cell = outlineView.dequeue(TextureCellView.self)!
-			cell.texturePath = \ColorSetDocument.colorSet.textures[index] as ReferenceWritableKeyPath<ColorSetDocument, Texture>
+			cell.texturePath = \.colorSet.textures[index] as DocumentPath<Texture>
 			return cell
 		default:
 			fatalError()
@@ -108,9 +139,9 @@ extension MainViewController: NSOutlineViewDataSource {
 		switch item {
 		case nil:
 			return headers.count
-		case Header.colors as Header:
+		case .colors as Header:
 			return colorSet.colorizations.count
-		case Header.textures as Header:
+		case .textures as Header:
 			return colorSet.textures.count
 		default:
 			fatalError()
@@ -135,9 +166,4 @@ extension MainViewController: NSOutlineViewDataSource {
 	func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
 		return 42
 	}
-}
-
-enum Header: String {
-	case colors
-	case textures
 }

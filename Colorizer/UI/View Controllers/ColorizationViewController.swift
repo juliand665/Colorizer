@@ -2,7 +2,7 @@
 
 import Cocoa
 
-class ColorizationViewController: NSViewController, LoadedViewController {
+class ColorizationViewController: NSViewController, LoadedViewController, DocumentObserving {
 	static let sceneID = NSStoryboard.SceneIdentifier("Colorization")
 	
 	@IBOutlet weak var nameField: NSTextField!
@@ -15,26 +15,24 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 		if filenameHelpPopover.isShown {
 			filenameHelpPopover.close()
 		} else {
-			filenameHelpPopover.show(relativeTo: .zero, of: sender, preferredEdge: .maxX)
+			filenameHelpPopover.show(relativeTo: .zero, of: sender, preferredEdge: .minY)
 		}
 	}
 	
 	@IBAction func nameChanged(_ sender: NSTextField) {
-		colorization.name = nameField.stringValue
+		colorization.name ∂= nameField.stringValue
 	}
 	
 	@IBAction func filenameChanged(_ sender: NSTextField) {
-		colorization.filename = filenameField.stringValue
+		colorization.filename ∂= filenameField.stringValue
 	}
 	
 	@IBAction func colorChanged(_ sender: NSColorWell) {
-		colorization.low = lowColorWell.color.color
-		colorization.high = highColorWell.color.color
-		update()
+		colorization.low ∂= lowColorWell.color.color
+		colorization.high ∂= highColorWell.color.color
 	}
 	
 	var filenameHelpPopover: NSPopover!
-	
 	var colorizationPath: DocumentPath<Colorization>!
 	var colorization: Colorization {
 		get {
@@ -50,18 +48,15 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 		filenameHelpPopover = NSPopover()
 		filenameHelpPopover.contentViewController = storyboard!.instantiate(FilenameHelpViewController.self)
 		filenameHelpPopover.behavior = .semitransient
-		document!.observeChanges(as: self, runRightNow: true) { [weak self] in
-			self?.update()
-		}
-	}
-	
-	func update() {
-		guard isViewLoaded && colorizationPath != nil else { return }
-		
-		nameField.stringValue = colorization.name
 		filenameField.stringValue = colorization.filename
 		lowColorWell.color = colorization.low.nsColor
 		highColorWell.color = colorization.high.nsColor
+
+		startObserving()
+	}
+	
+	func update() {
+		nameField.stringValue = colorization.name
 		gradientView.leftColor = colorization.low.nsColor
 		gradientView.rightColor = colorization.high.nsColor
 	}
@@ -69,44 +64,4 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 
 class FilenameHelpViewController: NSViewController, LoadedViewController {
 	static let sceneID = NSStoryboard.SceneIdentifier("Filename Help")
-}
-
-@IBDesignable
-class GradientView: NSView {
-	@IBInspectable var leftColor: NSColor! {
-		didSet {
-			setNeedsDisplay(bounds)
-		}
-	}
-	@IBInspectable var rightColor: NSColor! {
-		didSet {
-			setNeedsDisplay(bounds)
-		}
-	}
-	
-	override func draw(_ dirtyRect: NSRect) {
-		let gradient = NSGradient(starting: leftColor, ending: rightColor)!
-		gradient.draw(in: bounds, angle: 0)
-		
-		let edge = NSBezierPath()
-		edge.move(to: .zero)
-		edge.line(to: NSPoint(x: 0, y: bounds.height))
-		edge.line(to: NSPoint(x: bounds.width, y: bounds.height))
-		edge.line(to: NSPoint(x: bounds.width, y: 0))
-		edge.close()
-		edge.lineCapStyle = .squareLineCapStyle
-		edge.lineJoinStyle = .miterLineJoinStyle
-		
-		edge.lineWidth = 12
-		#colorLiteral(red: 0.5411764706, green: 0.5411764706, blue: 0.5411764706, alpha: 1).setStroke()
-		edge.stroke()
-		
-		edge.lineWidth = 10
-		#colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1).setStroke()
-		edge.stroke()
-		
-		edge.lineWidth = 2
-		#colorLiteral(red: 0.6862745098, green: 0.6862745098, blue: 0.6862745098, alpha: 1).setStroke()
-		edge.stroke()
-	}
 }

@@ -7,7 +7,7 @@ class HeaderCellView: NSTableCellView, LoadedTableCell {
 	
 	@IBOutlet weak var titleLabel: NSTextField!
 	
-	var header: Header! {
+	var header: MainViewController.Header! {
 		didSet {
 			titleLabel.stringValue = header.rawValue.uppercased()
 		}

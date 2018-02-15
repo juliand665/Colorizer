@@ -2,31 +2,59 @@
 
 import Foundation
 
-typealias Observer = Int
+typealias Address = Int
 
 protocol Observable: class {
-	var observers: [Observer: () -> Void] { get set }
+	var observations: [Address: AnyObservation] { get set }
 	
-	func observeChanges(as object: AnyObject, runRightNow: Bool, calling handler: @escaping () -> Void)
-	func stopObserving(as object: AnyObject)
+	func observeChanges<T>(as observer: T, runRightNow: Bool, calling callback: @escaping (T) -> Void) where T: AnyObject
+	func stopObserving<T>(as observer: T) where T: AnyObject
 	func notifyObservers()
 }
 
 extension Observable {
-	func observeChanges(as object: AnyObject, runRightNow: Bool = false, calling handler: @escaping () -> Void) {
-		let key = unsafeBitCast(object, to: Int.self) // use address of object to access memory
-		if runRightNow, observers[key] == nil {
-			handler()
+	func observeChanges<T>(as observer: T, runRightNow: Bool = false, calling callback: @escaping (T) -> Void) where T: AnyObject {
+		let key = address(of: observer)
+		if runRightNow {
+			callback(observer)
 		}
-		observers[key] = handler
+		observations[key] = Observation(observer: observer, callback: callback)
 	}
 	
-	func stopObserving(as object: AnyObject) {
-		let key = unsafeBitCast(object, to: Int.self)
-		observers[key] = nil
+	func stopObserving<T>(as object: T) where T: AnyObject {
+		let key = address(of: object)
+		print(key)
+		observations[key] = nil
 	}
 	
 	func notifyObservers() {
-		observers.values.forEach { $0() }
+		for (address, observation) in observations {
+			if !observation.run() {
+				observations[address] = nil
+			}
+		}
+	}
+}
+
+protocol AnyObservation {
+	func run() -> Bool
+}
+
+fileprivate class Observation<T>: AnyObservation where T: AnyObject {
+	weak var observer: T?
+	let callback: (T) -> Void
+	
+	init(observer: T, callback: @escaping (T) -> Void) {
+		self.observer = observer
+		self.callback = callback
+	}
+	
+	func run() -> Bool {
+		if let observer = observer {
+			callback(observer)
+			return true
+		} else {
+			return false
+		}
 	}
 }

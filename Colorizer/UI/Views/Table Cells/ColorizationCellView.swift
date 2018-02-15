@@ -2,14 +2,14 @@
 
 import Cocoa
 
-class ColorCellView: NSTableCellView, LoadedTableCell {
+class ColorizationCellView: NSTableCellView, LoadedTableCell, DocumentObserving {
 	static let reuseID = NSUserInterfaceItemIdentifier("Color Cell")
 	
 	@IBOutlet weak var colorView: ColorizationView!
 	@IBOutlet weak var nameLabel: NSTextField!
 	
 	@IBAction func nameEdited(_ sender: NSTextField) {
-		document![colorizationPath].name = nameLabel.stringValue
+		document![colorizationPath].name ∂= nameLabel.stringValue
 	}
 	
 	var colorizationPath: DocumentPath<Colorization>!
@@ -17,9 +17,7 @@ class ColorCellView: NSTableCellView, LoadedTableCell {
 	override func viewDidMoveToWindow() {
 		super.viewDidMoveToWindow()
 		guard window != nil else { return }
-		document!.observeChanges(as: self, runRightNow: true) { [weak self] in
-			self?.update()
-		}
+		startObserving()
 	}
 	
 	func update() { 

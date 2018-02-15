@@ -2,6 +2,12 @@
 
 import AppKit
 
+extension NSEvent {
+	static var isLeftMouseButtonDown: Bool {
+		return pressedMouseButtons & 1 != 0
+	}
+}
+
 protocol LoadedTableCell where Self: NSTableCellView {
 	static var reuseID: NSUserInterfaceItemIdentifier { get }
 }

@@ -5,7 +5,7 @@ import Cocoa
 typealias DocumentPath<T> = ReferenceWritableKeyPath<ColorSetDocument, T>
 
 class ColorSetDocument: NSDocument, Observable {
-	var observers: [Observer: () -> Void] = [:]
+	var observations: [Address: AnyObservation] = [:]
 	
 	let encoder = JSONEncoder()
 	let decoder = JSONDecoder()
@@ -13,6 +13,7 @@ class ColorSetDocument: NSDocument, Observable {
 	var colorSet = ColorSet() {
 		didSet {
 			updateChangeCount(.changeDone)
+			undoManager?.registerUndo(withTarget: self) { $0.colorSet = oldValue }
 			notifyObservers()
 		}
 	}
@@ -37,7 +38,6 @@ class ColorSetDocument: NSDocument, Observable {
 	override func makeWindowControllers() {
 		let storyboard = NSStoryboard(name: .init("Main"), bundle: nil)
 		let controller = storyboard.instantiateController(withIdentifier: .init("Color Set Window Controller")) as! WindowController
-		controller.contentViewController!.representedObject = self
 		self.addWindowController(controller)
 	}
 	
@@ -46,6 +46,9 @@ class ColorSetDocument: NSDocument, Observable {
 	}
 	
 	override func read(from data: Data, ofType typeName: String) throws {
+		undoManager?.disableUndoRegistration()
 		colorSet = try decoder.decode(ColorSet.self, from: data)
+		updateChangeCount(.changeCleared)
+		undoManager?.enableUndoRegistration()
 	}
 }

@@ -2,24 +2,21 @@
 
 import Cocoa
 
-class TextureCellView: NSTableCellView, LoadedTableCell {
+class TextureCellView: NSTableCellView, LoadedTableCell, DocumentObserving {
 	static let reuseID = NSUserInterfaceItemIdentifier("Texture Cell")
 	
 	@IBOutlet weak var iconView: NSImageView!
 	@IBOutlet weak var nameLabel: NSTextField!
 	
 	@IBAction func nameEdited(_ sender: NSTextField) {
-		document![texturePath].name = nameLabel.stringValue
+		document![texturePath].name ∂= nameLabel.stringValue
 	}
 	
 	var texturePath: DocumentPath<Texture>!
 	
 	override func viewDidMoveToWindow() {
 		super.viewDidMoveToWindow()
-		guard window != nil else { return }
-		document!.observeChanges(as: self, runRightNow: true) { [weak self] in
-			self?.update()
-		}
+		startObserving()
 	}
 	
 	func update() { 
