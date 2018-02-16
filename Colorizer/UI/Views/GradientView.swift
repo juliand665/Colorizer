@@ -2,13 +2,14 @@
 
 import Cocoa
 
+@objcMembers
 class GradientView: NSView {
-	var leftColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1) {
+	dynamic var leftColor: NSColor! {
 		didSet {
 			setNeedsDisplay(bounds)
 		}
 	}
-	var rightColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) {
+	dynamic var rightColor: NSColor! {
 		didSet {
 			setNeedsDisplay(bounds)
 		}
@@ -39,4 +40,9 @@ class GradientView: NSView {
 		#colorLiteral(red: 0.6862745098, green: 0.6862745098, blue: 0.6862745098, alpha: 1).setStroke()
 		edge.stroke()
 	}
+}
+
+extension NSBindingName {
+	static let leftColor = NSBindingName("leftColor")
+	static let rightColor = NSBindingName("rightColor")
 }

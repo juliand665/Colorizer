@@ -10,13 +10,7 @@ class ColorSetDocument: NSDocument, Observable {
 	let encoder = JSONEncoder()
 	let decoder = JSONDecoder()
 	
-	var colorSet = ColorSet() {
-		didSet {
-			updateChangeCount(.changeDone)
-			undoManager?.registerUndo(withTarget: self) { $0.colorSet = oldValue }
-			notifyObservers()
-		}
-	}
+	var colorSet = ColorSet()
 	
 	subscript<T>(_ keyPath: DocumentPath<T>) -> T {
 		get {
@@ -46,9 +40,7 @@ class ColorSetDocument: NSDocument, Observable {
 	}
 	
 	override func read(from data: Data, ofType typeName: String) throws {
-		undoManager?.disableUndoRegistration()
 		colorSet = try decoder.decode(ColorSet.self, from: data)
 		updateChangeCount(.changeCleared)
-		undoManager?.enableUndoRegistration()
 	}
 }

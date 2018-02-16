@@ -702,6 +702,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="reloadPressed:" target="jGA-0Y-lOj" id="DL5-V9-vzT"/>
+                                        </connections>
                                     </button>
                                 </toolbarItem>
                             </allowedToolbarItems>
@@ -806,9 +809,6 @@
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
-                                                                                    <connections>
-                                                                                        <action selector="nameEdited:" target="Zi3-bF-YZU" id="u35-QV-hjb"/>
-                                                                                    </connections>
                                                                                 </textField>
                                                                             </subviews>
                                                                             <constraints>
@@ -983,6 +983,7 @@ CA
                     </view>
                     <connections>
                         <outlet property="containerView" destination="j97-AZ-PsX" id="XRa-V3-q3n"/>
+                        <outlet property="removeButton" destination="Rc2-uY-h4j" id="AzY-Mn-ini"/>
                         <outlet property="sidebarView" destination="IPh-gG-U56" id="DQC-Y2-Pz9"/>
                     </connections>
                 </viewController>
@@ -1047,9 +1048,6 @@ CA
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
-                                                <connections>
-                                                    <action selector="nameChanged:" target="kme-qB-0dh" id="O4E-Ty-8zP"/>
-                                                </connections>
                                             </textField>
                                         </subviews>
                                         <visibilityPriorities>
@@ -1079,9 +1077,6 @@ CA
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
-                                                <connections>
-                                                    <action selector="filenameChanged:" target="kme-qB-0dh" id="3jL-Pd-GVw"/>
-                                                </connections>
                                             </textField>
                                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yOM-1u-EaO">
                                                 <rect key="frame" x="411" y="-2" width="25" height="25"/>
@@ -1126,9 +1121,6 @@ CA
                                                     <constraint firstAttribute="height" constant="50" id="hme-DS-MYk"/>
                                                 </constraints>
                                                 <color key="color" red="1" green="0.75182801489999995" blue="0.44736146929999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <connections>
-                                                    <action selector="colorChanged:" target="kme-qB-0dh" id="4Gg-Go-GEi"/>
-                                                </connections>
                                             </colorWell>
                                             <customView horizontalHuggingPriority="200" horizontalCompressionResistancePriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="M8y-Ur-mJK" customClass="GradientView" customModule="Colorizer" customModuleProvider="target">
                                                 <rect key="frame" x="125" y="0.0" width="251" height="50"/>
@@ -1147,9 +1139,6 @@ CA
                                                     <constraint firstAttribute="width" secondItem="Cfd-qC-oz3" secondAttribute="height" multiplier="1:1" id="jNN-LB-r7G"/>
                                                 </constraints>
                                                 <color key="color" red="0.99974685910000005" green="0.87977534530000001" blue="0.3806014955" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <connections>
-                                                    <action selector="colorChanged:" target="kme-qB-0dh" id="Sq3-C9-wfx"/>
-                                                </connections>
                                             </colorWell>
                                         </subviews>
                                         <constraints>
@@ -1247,9 +1236,6 @@ CA
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
-                                                <connections>
-                                                    <action selector="inputPathChanged:" target="WbI-HR-UXr" id="ohS-ry-SWe"/>
-                                                </connections>
                                             </textField>
                                         </subviews>
                                         <visibilityPriorities>
@@ -1281,9 +1267,6 @@ CA
                                                         <string>public.png</string>
                                                     </allowedTypes>
                                                 </pathCell>
-                                                <connections>
-                                                    <action selector="inputPathChanged:" target="WbI-HR-UXr" id="CpE-kS-5ic"/>
-                                                </connections>
                                             </pathControl>
                                         </subviews>
                                         <visibilityPriorities>
@@ -1315,9 +1298,6 @@ CA
                                                         <string>public.folder</string>
                                                     </allowedTypes>
                                                 </pathCell>
-                                                <connections>
-                                                    <action selector="outputPathChanged:" target="WbI-HR-UXr" id="gVa-iv-AiU"/>
-                                                </connections>
                                             </pathControl>
                                         </subviews>
                                         <visibilityPriorities>
@@ -1373,9 +1353,6 @@ CA
                                             <slider horizontalHuggingPriority="200" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="38S-7B-hUm">
                                                 <rect key="frame" x="35" y="-2" width="342" height="19"/>
                                                 <sliderCell key="cell" state="on" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="ZUx-H2-ghu"/>
-                                                <connections>
-                                                    <action selector="inputPathChanged:" target="WbI-HR-UXr" id="waR-HO-4It"/>
-                                                </connections>
                                             </slider>
                                         </subviews>
                                         <visibilityPriorities>
@@ -1401,9 +1378,6 @@ CA
                                             <slider horizontalHuggingPriority="200" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tf3-qK-fpu">
                                                 <rect key="frame" x="32" y="0.0" width="342" height="19"/>
                                                 <sliderCell key="cell" state="on" alignment="left" maxValue="1" tickMarkPosition="above" sliderType="linear" id="kHT-wJ-98c"/>
-                                                <connections>
-                                                    <action selector="inputPathChanged:" target="WbI-HR-UXr" id="0Fy-Eu-25q"/>
-                                                </connections>
                                             </slider>
                                         </subviews>
                                         <visibilityPriorities>

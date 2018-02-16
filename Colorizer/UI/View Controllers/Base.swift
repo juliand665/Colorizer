@@ -12,51 +12,31 @@ extension NSViewController: OnScreen {
 	}
 }
 
-extension Window: OnScreen {
+extension NSWindow: OnScreen {
 	var window: NSWindow? {
 		return self
 	}
 }
 
+extension NSWindowController: OnScreen {}
+
 extension NSView: OnScreen {}
 
 extension OnScreen {
-	var document: ColorSetDocument? {
-		return window?.windowController?.document as? ColorSetDocument
-	}
-	
 	var colorSet: ColorSet {
-		get {
-			return document!.colorSet
-		}
-		set {
-			document!.colorSet = newValue
-		}
+		return (window!.windowController!.document as! ColorSetDocument).colorSet
 	}
 }
 
-protocol DocumentObserving: OnScreen {
-	func startObserving()
-	func update()
-	func stopObserving()
-}
-
-extension DocumentObserving {
-	func startObserving() {
-		document?.observeChanges(as: self, runRightNow: true) {
-			$0.update()
-		}
+class WindowController: NSWindowController {
+	@IBAction func colorizePressed(_ sender: NSButton) {
+		colorSet.colorizeAll()
 	}
 	
-	func stopObserving() {
-		document?.stopObserving(as: self)
+	@IBAction func reloadPressed(_ sender: NSButton) {
+		colorSet.reloadImages()
 	}
 }
 
 // shuts up console messages:
-class WindowController: NSWindowController {
-	@IBAction func colorizePressed(_ sender: NSButton) {
-		(document as! ColorSetDocument).colorSet.colorizeAll()
-	}
-}
 class Window: NSWindow {}

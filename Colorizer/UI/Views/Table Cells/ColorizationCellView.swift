@@ -2,43 +2,40 @@
 
 import Cocoa
 
-class ColorizationCellView: NSTableCellView, LoadedTableCell, DocumentObserving {
+class ColorizationCellView: NSTableCellView, LoadedTableCell {
 	static let reuseID = NSUserInterfaceItemIdentifier("Color Cell")
 	
 	@IBOutlet weak var colorView: ColorizationView!
 	@IBOutlet weak var nameLabel: NSTextField!
 	
-	@IBAction func nameEdited(_ sender: NSTextField) {
-		document![colorizationPath].name ∂= nameLabel.stringValue
-	}
-	
-	var colorizationPath: DocumentPath<Colorization>!
-	
-	override func viewDidMoveToWindow() {
-		super.viewDidMoveToWindow()
-		guard window != nil else { return }
-		startObserving()
-	}
-	
-	func update() { 
-		let colorization = document![colorizationPath]
-		nameLabel.stringValue = colorization.name
-		colorView.colorization = colorization
+	var colorization: Colorization! {
+		didSet {
+			nameLabel.bind(.value, to: colorization, withKeyPath: #keyPath(Colorization.name))
+			colorView.colorization = colorization
+		}
 	}
 }
 
 class ColorizationView: NSView {
+	private var lowObservation: NSKeyValueObservation!
+	private var highObservation: NSKeyValueObservation!
+	
 	var colorization: Colorization! {
 		didSet {
-			setNeedsDisplay(bounds)
+			lowObservation = colorization.observe(\.low) { (_, _) in
+				self.setNeedsDisplay(self.bounds)
+			}
+			highObservation = colorization.observe(\.high) { (_, _) in
+				self.setNeedsDisplay(self.bounds)
+			}
 		}
 	}
 	
 	override func draw(_ dirtyRect: NSRect) {
 		let halfW = bounds.width / 2
 		let halfH = bounds.height / 2
-		let low = colorization.low.nsColor
-		let high = colorization.high.nsColor
+		let low = colorization.low
+		let high = colorization.high
 		NSColor.clear.setStroke()
 		
 		// Rectangles + Gradient

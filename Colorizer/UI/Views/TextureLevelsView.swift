@@ -3,16 +3,19 @@
 import Cocoa
 
 class TextureLevelsView: NSView {
-	var texturePath: DocumentPath<Texture>! {
+	var observation: NSKeyValueObservation!
+	var texture: Texture! {
 		didSet {
-			setNeedsDisplay(bounds)
+			observation = texture.observe(\.levels, options: .initial) { (_, _) in
+				self.setNeedsDisplay(self.bounds)
+			}
 		}
 	}
 	
 	override func draw(_ dirtyRect: NSRect) {
 		super.draw(dirtyRect)
 		
-		guard let texture = document?[texturePath], let levels = texture.levels else { return }
+		guard let levels = texture.levels else { return }
 		#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).set()
 		let width = bounds.width / CGFloat(levels.count)
 		var x: CGFloat = 0

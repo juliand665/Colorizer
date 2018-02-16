@@ -2,21 +2,27 @@
 
 import Cocoa
 
-struct ColorSet: Codable {
-	var colorizations: [Colorization] = []
-	var textures: [Texture] = []
+@objcMembers
+class ColorSet: NSObject, Codable {
+	dynamic var colorizations: [Colorization] = []
+	dynamic var textures: [Texture] = []
 	
-	init() {
+	override init() {
 		// TODO remove placeholders
 		colorizations = [
 			Colorization(named: "test",
-						 low: #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).color,
-						 high: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1).color)
+						 low: #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1),
+						 high: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1))
 		]
 		textures = [
 			Texture(named: "wool", at: URL(string: "file:///Users/juliandunskus/Documents/Active/Minecraft/Resources/Polishers/assets/minecraft/textures/blocks/wool_colored_white.png")!),
 			Texture(named: "dickbutt", at: URL(string: "file:///Users/juliandunskus/Pictures/Funny:Cute:Interesting/dickbutt.png")!)
 		]
+		super.init()
+	}
+	
+	func reloadImages() {
+		textures.forEach { $0.loadImage() }
 	}
 	
 	func colorizeAll() {
