@@ -2,7 +2,7 @@
 
 import Cocoa
 
-class ColorizationCellView: NSTableCellView, LoadedTableCell {
+class ColorizationCellView: NSTableCellView, Reusable {
 	static let reuseID = NSUserInterfaceItemIdentifier("Color Cell")
 	
 	@IBOutlet weak var colorView: ColorizationView!
@@ -34,28 +34,10 @@ class ColorizationView: NSView {
 	override func draw(_ dirtyRect: NSRect) {
 		let halfW = bounds.width / 2
 		let halfH = bounds.height / 2
-		let low = colorization.low
-		let high = colorization.high
-		NSColor.clear.setStroke()
-		
-		// Rectangles + Gradient
-		high.setFill()
+		colorization.high.setFill()
 		NSRect(x: 0, y: halfH, width: halfW, height: halfH).fill()
-		low.setFill()
+		colorization.low.setFill()
 		NSRect(x: 0, y: 0, width: halfW, height: halfH).fill()
-		let gradient = NSGradient(starting: high, ending: low)!
-		gradient.draw(in: NSRect(x: halfW, y: 0, width: halfW, height: bounds.height), angle: -90)
-		
-		/* Triangles:
-		low.setFill()
-		bounds.fill()
-		high.setFill()
-		let triangle = NSBezierPath()
-		triangle.move(to: .zero)
-		triangle.line(to: NSPoint(x: 0, y: bounds.height))
-		triangle.line(to: NSPoint(x: bounds.width, y: bounds.height))
-		triangle.close()
-		triangle.fill()
-		*/
+		colorization.gradient.draw(in: NSRect(x: halfW, y: 0, width: halfW, height: bounds.height), angle: 90)
 	}
 }

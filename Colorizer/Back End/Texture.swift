@@ -6,7 +6,8 @@ import Bitmap
 @objcMembers
 class Texture: NSObject, Codable {
 	dynamic var name: String
-	dynamic var path: URL { // has to have "file://" prefix for NSImage to load it
+	dynamic var filename: String
+	dynamic var path: URL {
 		didSet {
 			if path != oldValue {
 				loadImage()
@@ -16,16 +17,23 @@ class Texture: NSObject, Codable {
 			}
 		}
 	}
-	dynamic var outputPath: URL
 	dynamic var image: NSImage!
+	dynamic var outputPath: URL
+	dynamic var maskPath: URL? {
+		didSet {
+			if path != oldValue {
+				loadMask()
+			}
+		}
+	}
+	dynamic var maskImage: NSImage?
 	dynamic var levels: [CGFloat]!
 	dynamic var mapDomainMin: CGFloat = 0.0
 	dynamic var mapDomainMax: CGFloat = 1.0
-	// TODO gradient map variable? (h/s/v)
-	// TODO mask
 	
 	init(named name: String, at path: URL, outputtingTo outputPath: URL) {
 		self.name = name
+		self.filename = name
 		self.path = path
 		self.outputPath = outputPath
 		super.init()
@@ -41,9 +49,14 @@ class Texture: NSObject, Codable {
 	}
 	
 	func loadImage() {
-		image = NSImage(contentsOf: path)!
-		assert(image.isValid)
-		let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: [:])!
+		// load image
+		if let image = NSImage(contentsOf: path), image.isValid {
+			self.image = image
+		} else {
+			self.image = #imageLiteral(resourceName: "MissingTexture")
+		}
+		// compute levels histogram
+		let cgImage = image.cgImage()
 		let bitmap = Bitmap(from: cgImage)
 		var histogram = [Int](repeating: 0, count: 256)
 		for pixel in bitmap.pixels {
@@ -53,9 +66,22 @@ class Texture: NSObject, Codable {
 		levels = histogram.map { CGFloat($0) / max }
 	}
 	
+	func loadMask() {
+		if let path = maskPath,
+			let mask = NSImage(contentsOf: path),
+			mask.isValid,
+			mask.size == image.size {
+			maskImage = mask
+		} else {
+			maskImage = nil
+		}
+	}
+	
 	func colorized(by colorization: Colorization) -> CGImage {
-		let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: [:])!
+		let cgImage = image.cgImage()
 		let bitmap = Bitmap(from: cgImage)
+		let mask = (maskImage?.cgImage()).map(Bitmap.init)
+		let gradient = colorization.gradient
 		let low = UInt8(mapDomainMin * 255)
 		let dist = mapDomainMax - mapDomainMin
 		for y in 0..<bitmap.height {
@@ -63,8 +89,16 @@ class Texture: NSObject, Codable {
 				let brightness = bitmap[x, y].brightness
 				let clamped = max(low, brightness) - low
 				let factor = min(1, CGFloat(clamped) / 255 / dist)
-				let color = factor.interpolate(zero: colorization.low, one: colorization.high)
-				bitmap[x, y] = Pixel(color)
+				let new = gradient.interpolatedColor(atLocation: factor)
+				if let mask = mask {
+					let opacity = CGFloat(mask[x, y].alpha) / 255
+					let prev = bitmap[x, y].nsColor
+					let mix = opacity.interpolate(zero: prev, one: new)
+					bitmap[x, y] = Pixel(mix.withAlphaComponent(prev.alphaComponent))
+				} else {
+					let alpha = CGFloat(bitmap[x, y].alpha) / 255
+					bitmap[x, y] = Pixel(new.withAlphaComponent(alpha))
+				}
 			}
 		}
 		return bitmap.cgImage()
@@ -85,9 +119,18 @@ extension FloatingPoint {
 
 extension CGFloat {
 	func interpolate(zero: NSColor, one: NSColor) -> NSColor {
-		return NSColor(hue:        interpolate(zero: zero.hueComponent,        one: one.hueComponent),
-					   saturation: interpolate(zero: zero.saturationComponent, one: one.saturationComponent),
-					   brightness: interpolate(zero: zero.brightnessComponent, one: one.brightnessComponent),
-					   alpha:      interpolate(zero: zero.alphaComponent,      one: one.alphaComponent))
+		return NSColor(red:   interpolate(zero: zero.redComponent,   one: one.redComponent),
+					   green: interpolate(zero: zero.greenComponent, one: one.greenComponent),
+					   blue:  interpolate(zero: zero.blueComponent,  one: one.blueComponent),
+					   alpha: interpolate(zero: zero.alphaComponent, one: one.alphaComponent))
+	}
+}
+
+extension Pixel {
+	var nsColor: NSColor {
+		return NSColor(red:   CGFloat(red)   / 255,
+					   green: CGFloat(green) / 255,
+					   blue:  CGFloat(blue)  / 255,
+					   alpha: CGFloat(alpha) / 255)
 	}
 }

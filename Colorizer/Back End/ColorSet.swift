@@ -22,18 +22,33 @@ class ColorSet: NSObject, Codable {
 	}
 	
 	func reloadImages() {
-		textures.forEach { $0.loadImage() }
+		for texture in textures {
+			texture.loadImage()
+			texture.loadMask()
+		}
 	}
 	
 	func colorizeAll() {
-		for texture in textures {
-			for colorization in colorizations {
-				let colorized = texture.colorized(by: colorization)
-				let filename = colorization.filename.replacingOccurrences(of: "%", with: texture.name)
-				let path = texture.outputPath.appendingPathComponent("\(filename).png")
-				let png = NSBitmapImageRep(cgImage: colorized).representation(using: .png, properties: [:])!
-				try! png.write(to: path)
-			}
+		colorizations.forEach(colorizeAllTextures)
+	}
+	
+	func colorizeUsingAll(_ texture: Texture) {
+		for colorization in colorizations {
+			colorize(texture, using: colorization)
 		}
+	}
+	
+	func colorizeAllTextures(using colorization: Colorization) {
+		for texture in textures {
+			colorize(texture, using: colorization)
+		}
+	}
+	
+	func colorize(_ texture: Texture, using colorization: Colorization) {
+		let colorized = texture.colorized(by: colorization)
+		let filename = colorization.filename.replacingOccurrences(of: "%", with: texture.filename)
+		let path = texture.outputPath.appendingPathComponent("\(filename).png")
+		let png = NSBitmapImageRep(cgImage: colorized).representation(using: .png, properties: [:])!
+		try! png.write(to: path)
 	}
 }

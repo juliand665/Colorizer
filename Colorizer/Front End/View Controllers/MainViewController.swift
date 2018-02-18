@@ -3,6 +3,7 @@
 import Cocoa
 
 class MainViewController: NSViewController {
+	@IBOutlet weak var leftView: NSStackView!
 	@IBOutlet weak var sidebarView: NSOutlineView!
 	@IBOutlet weak var containerView: NSView!
 	@IBOutlet weak var removeButton: NSButton!
@@ -20,6 +21,7 @@ class MainViewController: NSViewController {
 				containerView.addSubview(new.view)
 				new.view.frame = containerView.bounds
 				new.view.autoresizingMask = [.width, .height]
+				leftView.nextResponder = new.view
 			}
 		}
 	}
@@ -43,7 +45,7 @@ class MainViewController: NSViewController {
 	}
 	
 	@IBAction func addButtonClicked(_ sender: NSButton) {
-		let new = Colorization(named: "untitled", low: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), high: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
+		let new = Colorization(named: "Untitled", low: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), high: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
 		colorSet.colorizations.append(new)
 		sidebarView.insertItems(at: [colorSet.colorizations.count - 1],
 								inParent: Header.colorizations)

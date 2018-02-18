@@ -2,7 +2,7 @@
 
 import Cocoa
 
-class TextureCellView: NSTableCellView, LoadedTableCell {
+class TextureCellView: NSTableCellView, Reusable {
 	static let reuseID = NSUserInterfaceItemIdentifier("Texture Cell")
 	
 	@IBOutlet weak var iconView: NSImageView!

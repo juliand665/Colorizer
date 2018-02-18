@@ -8,13 +8,19 @@ extension NSEvent {
 	}
 }
 
-protocol LoadedTableCell where Self: NSTableCellView {
+protocol Reusable {
 	static var reuseID: NSUserInterfaceItemIdentifier { get }
 }
 
 extension NSTableView {
-	func dequeue<Cell>(_ type: Cell.Type = Cell.self) -> Cell? where Cell: LoadedTableCell {
+	func dequeue<Cell>(_ type: Cell.Type = Cell.self) -> Cell? where Cell: NSTableCellView & Reusable {
 		return makeView(withIdentifier: Cell.reuseID, owner: nil) as? Cell
+	}
+}
+
+extension NSCollectionView {
+	func dequeue<Cell>(_ type: Cell.Type = Cell.self, for indexPath: IndexPath) -> Cell? where Cell: NSCollectionViewItem & Reusable {
+		return makeItem(withIdentifier: Cell.reuseID, for: indexPath) as? Cell
 	}
 }
 

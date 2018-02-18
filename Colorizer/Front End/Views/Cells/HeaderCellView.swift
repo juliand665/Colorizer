@@ -2,7 +2,7 @@
 
 import Cocoa
 
-class HeaderCellView: NSTableCellView, LoadedTableCell {
+class HeaderCellView: NSTableCellView, Reusable {
 	static let reuseID = NSUserInterfaceItemIdentifier("Header Cell")
 	
 	@IBOutlet weak var titleLabel: NSTextField!

@@ -4,9 +4,7 @@ import Cocoa
 
 typealias DocumentPath<T> = ReferenceWritableKeyPath<ColorSetDocument, T>
 
-class ColorSetDocument: NSDocument, Observable {
-	var observations: [Address: AnyObservation] = [:]
-	
+class ColorSetDocument: NSDocument {
 	let encoder = JSONEncoder()
 	let decoder = JSONDecoder()
 	

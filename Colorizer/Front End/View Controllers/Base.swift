@@ -29,11 +29,11 @@ extension OnScreen {
 }
 
 class WindowController: NSWindowController {
-	@IBAction func colorizePressed(_ sender: NSButton) {
+	@IBAction func colorizeAll(_ sender: NSButton) {
 		colorSet.colorizeAll()
 	}
 	
-	@IBAction func reloadPressed(_ sender: NSButton) {
+	@IBAction func reloadAll(_ sender: NSButton) {
 		colorSet.reloadImages()
 	}
 }

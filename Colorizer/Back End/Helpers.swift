@@ -8,15 +8,15 @@ extension Array where Element: Equatable {
 	}
 }
 
-func address(of object: AnyObject) -> Int {
-	return unsafeBitCast(object, to: Int.self)
+extension NSImage {
+	func cgImage() -> CGImage {
+		return cgImage(forProposedRect: nil, context: nil, hints: nil)!
+	}
 }
 
-// assign if changed (so as not to trigger didSet unnecessarily)
-infix operator ∂=: AssignmentPrecedence
-func ∂= <T>(lhs: inout T, rhs: T) where T: Equatable {
-	if lhs != rhs {
-		lhs = rhs
+extension CGImage {
+	func nsImage() -> NSImage {
+		return NSImage(cgImage: self, size: .zero)
 	}
 }
 

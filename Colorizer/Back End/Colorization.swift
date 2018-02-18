@@ -15,6 +15,10 @@ class Colorization: NSObject, Codable {
 	dynamic var low: NSColor
 	dynamic var high: NSColor
 	
+	var gradient: NSGradient {
+		return NSGradient(starting: low, ending: high)!
+	}
+	
 	init(named name: String, filename: String, low: NSColor, high: NSColor) {
 		self.name = name
 		self.filename = filename
@@ -24,6 +28,6 @@ class Colorization: NSObject, Codable {
 	}
 	
 	convenience init(named name: String, low: NSColor, high: NSColor) {
-		self.init(named: name, filename: "%_\(name)", low: low, high: high)
+		self.init(named: name, filename: "%_\(name.lowercased())", low: low, high: high)
 	}
 }
