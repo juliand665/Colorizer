@@ -60,7 +60,7 @@ class Texture: NSObject, Codable {
 		let bitmap = Bitmap(from: cgImage)
 		var histogram = [Int](repeating: 0, count: 256)
 		for pixel in bitmap.pixels {
-			histogram[Int(pixel.brightness)] += 1
+			histogram[Int(255 * pixel.nsColor.brightnessComponent)] += 1
 		}
 		let max = CGFloat(histogram.max()!)
 		levels = histogram.map { CGFloat($0) / max }
@@ -82,32 +82,22 @@ class Texture: NSObject, Codable {
 		let bitmap = Bitmap(from: cgImage)
 		let mask = (maskImage?.cgImage()).map(Bitmap.init)
 		let gradient = colorization.gradient
-		let low = UInt8(mapDomainMin * 255)
-		let dist = mapDomainMax - mapDomainMin
+		let low = mapDomainMin
+		let dist = max(0.0001, mapDomainMax - mapDomainMin) // avoid nonsense results
 		for y in 0..<bitmap.height {
 			for x in 0..<bitmap.width {
-				let brightness = bitmap[x, y].brightness
-				let clamped = max(low, brightness) - low
-				let factor = min(1, CGFloat(clamped) / 255 / dist)
-				let new = gradient.interpolatedColor(atLocation: factor)
+				let prev = bitmap[x, y].nsColor
+				let clamped = max(0, prev.brightnessComponent - low)
+				let factor = min(1, clamped / dist)
+				var new = gradient.interpolatedColor(atLocation: factor)
 				if let mask = mask {
 					let opacity = CGFloat(mask[x, y].alpha) / 255
-					let prev = bitmap[x, y].nsColor
-					let mix = opacity.interpolate(zero: prev, one: new)
-					bitmap[x, y] = Pixel(mix.withAlphaComponent(prev.alphaComponent))
-				} else {
-					let alpha = CGFloat(bitmap[x, y].alpha) / 255
-					bitmap[x, y] = Pixel(new.withAlphaComponent(alpha))
+					new = opacity.interpolate(zero: prev, one: new)
 				}
+				bitmap[x, y] = Pixel(new.withAlphaComponent(prev.alphaComponent))
 			}
 		}
 		return bitmap.cgImage()
-	}
-}
-
-extension Pixel {
-	var brightness: UInt8 {
-		return max(max(red, green), blue)
 	}
 }
 
