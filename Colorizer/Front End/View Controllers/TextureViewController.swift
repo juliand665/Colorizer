@@ -54,6 +54,7 @@ class TextureViewController: NSViewController, LoadedViewController {
 	
 	@IBAction func reloadTexture(_ sender: Any? = nil) {
 		texture.loadImage()
+		texture.loadMask()
 	}
 	
 	weak var previewViewController: PreviewViewController!
