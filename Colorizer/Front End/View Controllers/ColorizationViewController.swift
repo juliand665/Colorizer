@@ -24,25 +24,11 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 		}
 	}
 	
-	@IBAction func showFilenameHelp(_ sender: NSButton) {
-		if filenameHelpPopover.isShown {
-			filenameHelpPopover.close()
-		} else {
-			filenameHelpPopover.show(relativeTo: .zero, of: sender, preferredEdge: .minY)
-		}
-	}
-	
 	@IBAction func colorizeAndSave(_ sender: Any? = nil) {
 		colorSet.colorizeAllTextures(using: colorization)
 	}
 	
 	var previewViewController: PreviewViewController!
-	lazy var filenameHelpPopover: NSPopover = {
-		let popover = NSPopover()
-		popover.contentViewController = storyboard!.instantiate(FilenameHelpViewController.self)
-		popover.behavior = .semitransient
-		return popover
-	}()
 	var colorization: Colorization! {
 		didSet {
 			nameField.bind(.value, to: colorization, withKeyPath: #keyPath(Colorization.name))
@@ -64,8 +50,4 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 		previewViewController.view.frame = previewView.bounds
 		previewViewController.view.autoresizingMask = [.width, .height]
 	}
-}
-
-class FilenameHelpViewController: NSViewController, LoadedViewController {
-	static let sceneID = NSStoryboard.SceneIdentifier("Filename Help")
 }

@@ -32,6 +32,14 @@ class TextureViewController: NSViewController, LoadedViewController {
 		texture.maskPath = nil
 	}
 	
+	@IBAction func showFilenameHelp(_ sender: NSButton) {
+		if filenameHelpPopover.isShown {
+			filenameHelpPopover.close()
+		} else {
+			filenameHelpPopover.show(relativeTo: .zero, of: sender, preferredEdge: .minY)
+		}
+	}
+	
 	@IBAction func showMaskHelp(_ sender: NSButton) {
 		if maskHelpPopover.isShown {
 			maskHelpPopover.close()
@@ -49,15 +57,24 @@ class TextureViewController: NSViewController, LoadedViewController {
 	}
 	
 	var previewViewController: PreviewViewController!
+	
 	var imageObservation: NSKeyValueObservation!
 	var maskPathObservation: NSKeyValueObservation!
 	var maskObservation: NSKeyValueObservation!
+	
+	lazy var filenameHelpPopover: NSPopover = {
+		let popover = NSPopover()
+		popover.contentViewController = storyboard!.instantiate(FilenameHelpViewController.self)
+		popover.behavior = .semitransient
+		return popover
+	}()
 	lazy var maskHelpPopover: NSPopover = {
 		let popover = NSPopover()
 		popover.contentViewController = storyboard!.instantiate(MaskHelpViewController.self)
 		popover.behavior = .semitransient
 		return popover
 	}()
+	
 	var texture: Texture! {
 		didSet {
 			levelsView.texture = texture
@@ -105,6 +122,10 @@ class TextureViewController: NSViewController, LoadedViewController {
 		previewViewController.view.frame = previewView.bounds
 		previewViewController.view.autoresizingMask = [.width, .height]
 	}
+}
+
+class FilenameHelpViewController: NSViewController, LoadedViewController {
+	static let sceneID = NSStoryboard.SceneIdentifier("Filename Help")
 }
 
 class MaskHelpViewController: NSViewController, LoadedViewController {

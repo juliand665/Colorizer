@@ -1085,8 +1085,8 @@ CA
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="56B-45-oUr">
-                                                <rect key="frame" x="67" y="0.0" width="338" height="22"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="e.g. %_red" drawsBackground="YES" id="7ce-bO-L03">
+                                                <rect key="frame" x="67" y="0.0" width="367" height="22"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="e.g. red" drawsBackground="YES" id="7ce-bO-L03">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1095,24 +1095,12 @@ CA
                                                     <outlet property="nextKeyView" destination="wk0-PN-gHJ" id="l8S-Jg-cjp"/>
                                                 </connections>
                                             </textField>
-                                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yOM-1u-EaO">
-                                                <rect key="frame" x="411" y="-2" width="25" height="25"/>
-                                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F7w-CX-cv0">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="showFilenameHelp:" target="kme-qB-0dh" id="TQd-f6-99N"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
-                                            <integer value="1000"/>
                                         </visibilityPriorities>
                                         <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
@@ -1294,11 +1282,11 @@ CA
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="7Tb-8z-CfP">
-                                                <rect key="frame" x="67" y="0.0" width="384" height="22"/>
+                                                <rect key="frame" x="67" y="0.0" width="355" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="7tt-7l-Jlf"/>
                                                 </constraints>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="e.g. wool_colored" drawsBackground="YES" id="n8t-7N-xo4">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="e.g. wool_%" drawsBackground="YES" id="n8t-7N-xo4">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1307,12 +1295,24 @@ CA
                                                     <outlet property="nextKeyView" destination="Vof-Qh-2F2" id="p5o-O7-qFk"/>
                                                 </connections>
                                             </textField>
+                                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yOM-1u-EaO">
+                                                <rect key="frame" x="428" y="-2" width="25" height="25"/>
+                                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F7w-CX-cv0">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="showFilenameHelp:" target="WbI-HR-UXr" id="BWy-3o-mbg"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
+                                            <integer value="1000"/>
                                         </visibilityPriorities>
                                         <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
@@ -1677,7 +1677,7 @@ CA
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="jAt-MR-4w8">
                                     <font key="font" metaFont="system"/>
                                     <string key="title">This defines the filename of the colorized texture when exported.
-% will be replaced by the texture filename, e.g. if that's "wool" and this filename is "red_%", the output filename will be "red_wool"</string>
+% will be replaced by the colorization filename, e.g. if that's "red" and this filename is "wool_%", the output filename will be "wool_red".</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1693,7 +1693,7 @@ CA
                 </viewController>
                 <customObject id="RmH-Jc-baG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="974" y="828"/>
+            <point key="canvasLocation" x="1000" y="1311"/>
         </scene>
         <!--Mask Help View Controller-->
         <scene sceneID="v9v-y1-K8r">
@@ -1727,7 +1727,7 @@ e.g. if the mask is fully opaque on the left and fades to fully transparent on t
                 </viewController>
                 <customObject id="If4-4c-0PU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="998" y="1319"/>
+            <point key="canvasLocation" x="999" y="1489"/>
         </scene>
     </scenes>
     <resources>

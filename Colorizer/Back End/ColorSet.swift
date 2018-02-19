@@ -32,7 +32,7 @@ class ColorSet: NSObject, Codable {
 	
 	func colorize(_ texture: Texture, using colorization: Colorization) {
 		let colorized = texture.colorized(by: colorization)
-		let filename = colorization.filename.replacingOccurrences(of: "%", with: texture.filename)
+		let filename = texture.filename.replacingOccurrences(of: "%", with: colorization.filename)
 		let path = texture.outputPath.appendingPathComponent("\(filename).png")
 		let png = NSBitmapImageRep(cgImage: colorized).representation(using: .png, properties: [:])!
 		try! png.write(to: path)
