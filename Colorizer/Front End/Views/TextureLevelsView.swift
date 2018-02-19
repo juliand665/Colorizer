@@ -6,7 +6,7 @@ class TextureLevelsView: NSView {
 	var observation: NSKeyValueObservation!
 	var texture: Texture! {
 		didSet {
-			observation = texture.observe(\.levels, options: .initial) { (_, _) in
+			observation = texture.observe(\.levels, options: .initial) { [unowned self] (_, _) in
 				self.setNeedsDisplay(self.bounds)
 			}
 		}

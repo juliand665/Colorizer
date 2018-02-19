@@ -686,14 +686,14 @@
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Kfa-oZ-Bdk"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="RK6-Ar-XIX"/>
-                                <toolbarItem implicitItemIdentifier="9B7CA7F9-B4D0-486E-848D-20DE495CF4DC" label="Colorize &amp; Save" paletteLabel="Colorize &amp; Save To Disk" id="hRT-6C-O1b">
+                                <toolbarItem implicitItemIdentifier="9B7CA7F9-B4D0-486E-848D-20DE495CF4DC" label="Colorize All" paletteLabel="Colorize All Textures &amp; Save to Disk" id="hRT-6C-O1b">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="70" height="32"/>
-                                    <size key="maxSize" width="102" height="43"/>
+                                    <size key="maxSize" width="121" height="65"/>
                                     <button key="view" verticalHuggingPriority="750" id="kHb-5v-Kn8">
-                                        <rect key="frame" x="26" y="14" width="80" height="43"/>
+                                        <rect key="frame" x="37" y="14" width="121" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Colorize" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3fc-vt-JE7">
+                                        <buttonCell key="cell" type="push" title="Colorize All" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3fc-vt-JE7">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -702,12 +702,12 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="B78285DF-643C-4AEE-9BCE-6934E977FBC4" label="Reload Images" paletteLabel="Reload Images From Disk" image="NSRefreshTemplate" id="Kn1-jw-dfV">
+                                <toolbarItem implicitItemIdentifier="B78285DF-643C-4AEE-9BCE-6934E977FBC4" label="Reload All" paletteLabel="Reload All Textures from Disk" image="NSRefreshTemplate" id="Kn1-jw-dfV">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="40" height="32"/>
-                                    <size key="maxSize" width="40" height="32"/>
+                                    <size key="maxSize" width="40" height="43"/>
                                     <button key="view" verticalHuggingPriority="750" id="BMR-E4-5Gr">
-                                        <rect key="frame" x="50" y="14" width="40" height="32"/>
+                                        <rect key="frame" x="61" y="14" width="40" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xZ3-Wl-cZF">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -718,11 +718,45 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="8B4B18BD-0B32-4DBD-A7C9-8EBE9BE8A3FD" label="Colorize" paletteLabel="Colorize This &amp; Save to Disk" id="glK-lL-qX5">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="82" height="32"/>
+                                    <size key="maxSize" width="102" height="43"/>
+                                    <button key="view" verticalHuggingPriority="750" id="wA5-02-dpz">
+                                        <rect key="frame" x="27" y="14" width="102" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="Colorize" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vsf-wC-jHr">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="colorizeAndSave:" target="6f7-a7-6o1" id="ooI-eW-qkq"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="5E786311-7DAA-4F7F-891F-CA45C72079E0" label="Reload" paletteLabel="Reload this Texture" image="NSRefreshTemplate" id="w9D-cS-nU5">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="40" height="32"/>
+                                    <size key="maxSize" width="40" height="43"/>
+                                    <button key="view" verticalHuggingPriority="750" id="q6u-nf-ewy">
+                                        <rect key="frame" x="34" y="14" width="40" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="h2q-Y1-dSC">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="reloadTexture:" target="6f7-a7-6o1" id="1fj-4L-sCs"/>
+                                        </connections>
+                                    </button>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="Kn1-jw-dfV"/>
                                 <toolbarItem reference="hRT-6C-O1b"/>
                                 <toolbarItem reference="RK6-Ar-XIX"/>
+                                <toolbarItem reference="w9D-cS-nU5"/>
+                                <toolbarItem reference="glK-lL-qX5"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -1230,14 +1264,14 @@ CA
             <objects>
                 <viewController storyboardIdentifier="Texture" id="WbI-HR-UXr" customClass="TextureViewController" customModule="Colorizer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="GbW-eC-BeL">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="389"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="453"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y91-eb-HyH">
-                                <rect key="frame" x="8" y="8" width="484" height="373"/>
+                                <rect key="frame" x="8" y="8" width="484" height="437"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ul6-rS-EJ8">
-                                        <rect key="frame" x="52" y="351" width="432" height="22"/>
+                                        <rect key="frame" x="52" y="415" width="432" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="600" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Be-XC-U4P">
                                                 <rect key="frame" x="-2" y="3" width="44" height="17"/>
@@ -1272,7 +1306,7 @@ CA
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RPe-JS-p3d">
-                                        <rect key="frame" x="33" y="321" width="451" height="22"/>
+                                        <rect key="frame" x="33" y="385" width="451" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="600" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xyO-Kz-rW1">
                                                 <rect key="frame" x="-2" y="3" width="63" height="17"/>
@@ -1319,7 +1353,7 @@ CA
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GoI-Ka-MH7">
-                                        <rect key="frame" x="36" y="293" width="448" height="20"/>
+                                        <rect key="frame" x="36" y="357" width="448" height="20"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="600" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="07g-b0-hoP">
                                                 <rect key="frame" x="-2" y="2" width="60" height="17"/>
@@ -1350,7 +1384,7 @@ CA
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SYx-CG-QqE">
-                                        <rect key="frame" x="4" y="265" width="480" height="20"/>
+                                        <rect key="frame" x="4" y="329" width="480" height="20"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="600" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pvl-dQ-OEU">
                                                 <rect key="frame" x="-2" y="2" width="92" height="17"/>
@@ -1381,7 +1415,7 @@ CA
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l59-0d-8qh">
-                                        <rect key="frame" x="0.0" y="236" width="484" height="21"/>
+                                        <rect key="frame" x="0.0" y="300" width="484" height="21"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="600" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lJT-1I-yxr">
                                                 <rect key="frame" x="-2" y="2" width="96" height="17"/>
@@ -1435,26 +1469,26 @@ CA
                                         </customSpacing>
                                     </stackView>
                                     <box horizontalHuggingPriority="200" verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="luc-9e-IeQ">
-                                        <rect key="frame" x="0.0" y="225" width="484" height="5"/>
+                                        <rect key="frame" x="0.0" y="289" width="484" height="5"/>
                                     </box>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vnU-S5-2rL">
-                                        <rect key="frame" x="50" y="155" width="434" height="64"/>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vnU-S5-2rL">
+                                        <rect key="frame" x="50" y="155" width="434" height="128"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="600" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iyh-Sa-6Ji">
-                                                <rect key="frame" x="-2" y="24" width="46" height="17"/>
+                                                <rect key="frame" x="-2" y="56" width="46" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Levels:" id="REE-YF-NeT">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <customView horizontalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="ywV-Wj-tQv">
-                                                <rect key="frame" x="50" y="0.0" width="384" height="64"/>
+                                            <customView horizontalHuggingPriority="1" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="ywV-Wj-tQv">
+                                                <rect key="frame" x="50" y="0.0" width="384" height="128"/>
                                                 <subviews>
-                                                    <customView horizontalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="JCG-1o-Jip" customClass="TextureLevelsView" customModule="Colorizer" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="0.0" width="368" height="64"/>
+                                                    <customView horizontalHuggingPriority="200" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="JCG-1o-Jip" customClass="TextureLevelsView" customModule="Colorizer" customModuleProvider="target">
+                                                        <rect key="frame" x="8" y="0.0" width="368" height="128"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="64" id="qnX-2e-9hC"/>
+                                                            <constraint firstAttribute="height" constant="128" id="ouA-U0-ewc"/>
                                                         </constraints>
                                                     </customView>
                                                 </subviews>
@@ -1583,6 +1617,7 @@ CA
                             <constraint firstItem="Y91-eb-HyH" firstAttribute="leading" secondItem="GbW-eC-BeL" secondAttribute="leading" constant="8" id="lSK-Ap-tG9"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Y91-eb-HyH" secondAttribute="bottom" constant="8" id="pvg-s3-v8i"/>
                             <constraint firstItem="Y91-eb-HyH" firstAttribute="top" secondItem="GbW-eC-BeL" secondAttribute="top" constant="8" id="wNG-uD-Teh"/>
+                            <constraint firstAttribute="bottom" secondItem="Y91-eb-HyH" secondAttribute="bottom" priority="200" constant="8" id="yhi-L9-7TE"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1600,7 +1635,7 @@ CA
                 </viewController>
                 <customObject id="9HJ-3y-Uqj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="578" y="1455"/>
+            <point key="canvasLocation" x="578" y="1487"/>
         </scene>
         <!--Preview View Controller-->
         <scene sceneID="XLs-N1-baT">

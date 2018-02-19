@@ -22,10 +22,10 @@ class ColorizationView: NSView {
 	
 	var colorization: Colorization! {
 		didSet {
-			lowObservation = colorization.observe(\.low) { (_, _) in
+			lowObservation = colorization.observe(\.low) { [unowned self] (_, _) in
 				self.setNeedsDisplay(self.bounds)
 			}
-			highObservation = colorization.observe(\.high) { (_, _) in
+			highObservation = colorization.observe(\.high) { [unowned self] (_, _) in
 				self.setNeedsDisplay(self.bounds)
 			}
 		}

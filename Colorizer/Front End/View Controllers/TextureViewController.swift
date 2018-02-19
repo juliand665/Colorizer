@@ -56,7 +56,7 @@ class TextureViewController: NSViewController, LoadedViewController {
 		texture.loadImage()
 	}
 	
-	var previewViewController: PreviewViewController!
+	weak var previewViewController: PreviewViewController!
 	
 	var imageObservation: NSKeyValueObservation!
 	var maskPathObservation: NSKeyValueObservation!
@@ -85,10 +85,10 @@ class TextureViewController: NSViewController, LoadedViewController {
 			inputPathControl .bind(.value, to: texture, withKeyPath: #keyPath(Texture.path))
 			outputPathControl.bind(.value, to: texture, withKeyPath: #keyPath(Texture.outputPath))
 			maskPathControl  .bind(.value, to: texture, withKeyPath: #keyPath(Texture.maskPath), options: [.nullPlaceholder: "No Mask Set"])
-			imageObservation = texture.observe(\.image) { (_, _) in
+			imageObservation = texture.observe(\.image) { [unowned self] (_, _) in
 				self.refreshPreview()
 			}
-			maskObservation = texture.observe(\.maskImage) { (texture, change) in
+			maskObservation = texture.observe(\.maskImage) { [unowned self] (texture, change) in
 				if texture.maskPath != nil, texture.maskImage == nil {
 					let alert = NSAlert()
 					alert.addButton(withTitle: "Remove Link")
@@ -106,7 +106,7 @@ class TextureViewController: NSViewController, LoadedViewController {
 				}
 				self.refreshPreview()
 			}
-			maskPathObservation = texture.observe(\.maskPath, options: .initial) { (texture, _) in
+			maskPathObservation = texture.observe(\.maskPath, options: .initial) { [unowned self] (texture, _) in
 				self.removeMaskButton.isEnabled = texture.maskPath != nil
 			}
 			previewViewController.prepare()
@@ -122,6 +122,8 @@ class TextureViewController: NSViewController, LoadedViewController {
 		previewViewController.view.frame = previewView.bounds
 		previewViewController.view.autoresizingMask = [.width, .height]
 	}
+	
+	
 }
 
 class FilenameHelpViewController: NSViewController, LoadedViewController {
