@@ -57,7 +57,7 @@ class TextureViewController: NSViewController, LoadedViewController {
 		texture.loadMask()
 	}
 	
-	weak var previewViewController: PreviewViewController!
+	var previewViewController: PreviewViewController!
 	
 	var imageObservation: NSKeyValueObservation!
 	var maskPathObservation: NSKeyValueObservation!
@@ -123,8 +123,6 @@ class TextureViewController: NSViewController, LoadedViewController {
 		previewViewController.view.frame = previewView.bounds
 		previewViewController.view.autoresizingMask = [.width, .height]
 	}
-	
-	
 }
 
 class FilenameHelpViewController: NSViewController, LoadedViewController {
