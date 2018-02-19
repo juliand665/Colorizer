@@ -28,6 +28,9 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 		colorSet.colorizeAllTextures(using: colorization)
 	}
 	
+	var lowObservation: NSKeyValueObservation!
+	var highObservation: NSKeyValueObservation!
+	
 	var previewViewController: PreviewViewController!
 	var colorization: Colorization! {
 		didSet {
@@ -37,6 +40,12 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 			highColorWell.bind(.value, to: colorization, withKeyPath: #keyPath(Colorization.high))
 			gradientView.bind(.leftColor, to: colorization, withKeyPath: #keyPath(Colorization.low))
 			gradientView.bind(.rightColor, to: colorization, withKeyPath: #keyPath(Colorization.high))
+			lowObservation = colorization.observe(\.low) { [unowned self] (_, _) in
+				self.refreshPreview()
+			}
+			highObservation = colorization.observe(\.high) { [unowned self] (_, _) in
+				self.refreshPreview()
+			}
 			previewViewController.prepare()
 			refreshPreview()
 		}
