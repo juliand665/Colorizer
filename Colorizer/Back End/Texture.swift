@@ -58,12 +58,13 @@ class Texture: NSObject, Codable {
 		// compute levels histogram
 		let cgImage = image.cgImage()
 		let bitmap = Bitmap(from: cgImage)
+		let colors = bitmap.pixels.map { $0.nsColor }
 		var histogram = [Int](repeating: 0, count: 256)
-		for pixel in bitmap.pixels {
-			histogram[Int(255 * pixel.nsColor.brightnessComponent)] += 1
+		for color in colors {
+			histogram[Int(255 * color.brightnessComponent)] += 1
 		}
-		let max = CGFloat(histogram.max()!)
-		levels = histogram.map { CGFloat($0) / max }
+		let maximum = CGFloat(histogram.max()!)
+		levels = histogram.map { CGFloat($0) / maximum }
 	}
 	
 	func loadMask() {
@@ -118,9 +119,12 @@ extension CGFloat {
 
 extension Pixel {
 	var nsColor: NSColor {
-		return NSColor(red:   CGFloat(red)   / 255,
-					   green: CGFloat(green) / 255,
-					   blue:  CGFloat(blue)  / 255,
-					   alpha: CGFloat(alpha) / 255)
+		guard self.alpha > 0 else { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) }
+		let alpha = CGFloat(self.alpha) // stupid premultiplication
+		let color = NSColor(red:   CGFloat(red)   / alpha,
+					   green: CGFloat(green) / alpha,
+					   blue:  CGFloat(blue)  / alpha,
+					   alpha: alpha / 255)
+		return color
 	}
 }
