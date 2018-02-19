@@ -28,6 +28,6 @@ class Colorization: NSObject, Codable {
 	}
 	
 	convenience init(named name: String, low: NSColor, high: NSColor) {
-		self.init(named: name, filename: "%_\(name.lowercased())", low: low, high: high)
+		self.init(named: name, filename: name.lowercased(), low: low, high: high)
 	}
 }

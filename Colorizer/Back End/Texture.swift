@@ -33,7 +33,7 @@ class Texture: NSObject, Codable {
 	
 	init(named name: String, at path: URL, outputtingTo outputPath: URL) {
 		self.name = name
-		self.filename = name
+		self.filename = "\(name)_%"
 		self.path = path
 		self.outputPath = outputPath
 		super.init()
