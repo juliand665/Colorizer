@@ -49,22 +49,12 @@ class Texture: NSObject, Codable {
 	}
 	
 	func loadImage() {
-		// load image
 		if let image = NSImage(contentsOf: path), image.isValid {
 			self.image = image
 		} else {
 			self.image = #imageLiteral(resourceName: "MissingTexture")
 		}
-		// compute levels histogram
-		let cgImage = image.cgImage()
-		let bitmap = Bitmap(from: cgImage)
-		let colors = bitmap.pixels.map { $0.nsColor }
-		var histogram = [Int](repeating: 0, count: 256)
-		for color in colors {
-			histogram[Int(255 * color.brightnessComponent)] += 1
-		}
-		let maximum = CGFloat(histogram.max()!)
-		levels = histogram.map { CGFloat($0) / maximum }
+		computeLevels()
 	}
 	
 	func loadMask() {
@@ -76,11 +66,30 @@ class Texture: NSObject, Codable {
 		} else {
 			maskImage = nil
 		}
+		computeLevels()
+	}
+	
+	func computeLevels() {
+		let bitmap = Bitmap(from: image.cgImage())
+		var colors = AnySequence(bitmap.pixels.lazy.map { $0.nsColor })
+		if let maskImage = maskImage {
+			let mask = Bitmap(from: maskImage.cgImage())
+			colors = AnySequence(zip(colors, mask.pixels)
+				.lazy
+				.filter { $0.1.alpha > 0 }
+				.map { $0.0 }
+			)
+		}
+		var histogram = [Int](repeating: 0, count: 256)
+		for color in colors {
+			histogram[Int(255 * color.brightnessComponent)] += 1
+		}
+		let maximum = CGFloat(histogram.max()!)
+		levels = histogram.map { CGFloat($0) / maximum }
 	}
 	
 	func colorized(by colorization: Colorization) -> CGImage {
-		let cgImage = image.cgImage()
-		let bitmap = Bitmap(from: cgImage)
+		let bitmap = Bitmap(from: image.cgImage())
 		let mask = (maskImage?.cgImage()).map(Bitmap.init)
 		let gradient = colorization.gradient
 		let low = mapDomainMin
