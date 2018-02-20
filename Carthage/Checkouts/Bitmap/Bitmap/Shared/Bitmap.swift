@@ -1,10 +1,3 @@
-//
-//  Bitmap.swift
-//  Bitmap
-//
-//  Created by Julian Dunskus on 31.08.17.
-//
-
 import CoreGraphics
 
 // 'ere be horrible CoreGraphics APIs
@@ -97,8 +90,8 @@ public class Bitmap {
 	- Parameter block: This is your chance to prove yourself! Do whatever you want with the context you're given, just make sure it doesn't outlive this call. God knows what happens if you do anything to it after this bitmap is deallocated.
 	- Parameter context: A context referencing the bitmap's underlying data. Anything you do to this context will be reflected in the bitmap automagically.
 	*/
-	public func withContext<Result>(do block: (_ context: CGContext) -> Result) -> Result {
-		return block(context)
+	public func withContext<Result>(do block: (_ context: CGContext) throws -> Result) rethrows -> Result {
+		return try block(context)
 	}
 	
 	/// creates and returns a new copy of this bitmap

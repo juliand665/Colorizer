@@ -125,15 +125,3 @@ extension CGFloat {
 					   alpha: interpolate(zero: zero.alphaComponent, one: one.alphaComponent))
 	}
 }
-
-extension Pixel {
-	var nsColor: NSColor {
-		guard self.alpha > 0 else { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) }
-		let alpha = CGFloat(self.alpha) // stupid premultiplication
-		let color = NSColor(red:   CGFloat(red)   / alpha,
-					   green: CGFloat(green) / alpha,
-					   blue:  CGFloat(blue)  / alpha,
-					   alpha: alpha / 255)
-		return color
-	}
-}
