@@ -16,7 +16,7 @@ class TextureLevelsView: NSView {
 		super.draw(dirtyRect)
 		
 		guard let levels = texture.levels else { return }
-		#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).set()
+		NSColor.textColor.set()
 		let width = bounds.width / CGFloat(levels.count)
 		var x: CGFloat = 0
 		for value in levels {
