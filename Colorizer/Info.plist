@@ -12,7 +12,7 @@
 				<string>colorset</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string></string>
+			<string>DocumentIcon</string>
 			<key>CFBundleTypeName</key>
 			<string>Color Set</string>
 			<key>CFBundleTypeRole</key>

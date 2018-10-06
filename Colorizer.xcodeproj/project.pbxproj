@@ -19,6 +19,7 @@
 		9550A0D2201E8E0300BAF7EE /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9550A0D1201E8E0300BAF7EE /* HelpViewController.swift */; };
 		9557FD13202FD95200F9FA6B /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9557FD12202FD95200F9FA6B /* Helpers.swift */; };
 		956568BB1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956568BA1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift */; };
+		956FAFA2216930FA00537324 /* DocumentIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 956FAFA1216930FA00537324 /* DocumentIcon.icns */; };
 		957BC5CA2033C85A00ABF7BB /* TextureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957BC5C92033C85A00ABF7BB /* TextureViewController.swift */; };
 		957BC5CC2034993C00ABF7BB /* TextureLevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957BC5CB2034993C00ABF7BB /* TextureLevelsView.swift */; };
 		957BC5CE2034BE3B00ABF7BB /* Bitmap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957BC5CD2034BE3B00ABF7BB /* Bitmap.framework */; };
@@ -65,6 +66,7 @@
 		9550A0D5201F7E4F00BAF7EE /* Colorizer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Colorizer.entitlements; sourceTree = "<group>"; };
 		9557FD12202FD95200F9FA6B /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		956568BA1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelPerfectImageView.swift; sourceTree = "<group>"; };
+		956FAFA1216930FA00537324 /* DocumentIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = DocumentIcon.icns; path = Design/DocumentIcon.icns; sourceTree = SOURCE_ROOT; };
 		957BC5C92033C85A00ABF7BB /* TextureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureViewController.swift; sourceTree = "<group>"; };
 		957BC5CB2034993C00ABF7BB /* TextureLevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureLevelsView.swift; sourceTree = "<group>"; };
 		957BC5CD2034BE3B00ABF7BB /* Bitmap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bitmap.framework; path = Carthage/Build/Mac/Bitmap.framework; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				9550A0D7201F9AE000BAF7EE /* Back End */,
 				9550A0D6201F9AD700BAF7EE /* Front End */,
 				952828E71EB9F7F20028149E /* Assets.xcassets */,
+				956FAFA1216930FA00537324 /* DocumentIcon.icns */,
 				952828EC1EB9F7F20028149E /* Info.plist */,
 			);
 			path = Colorizer;
@@ -249,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				956FAFA2216930FA00537324 /* DocumentIcon.icns in Resources */,
 				952828E81EB9F7F20028149E /* Assets.xcassets in Resources */,
 				952828EB1EB9F7F20028149E /* Main.storyboard in Resources */,
 				95EC77EB2037D5B200291145 /* PreviewItem.xib in Resources */,
