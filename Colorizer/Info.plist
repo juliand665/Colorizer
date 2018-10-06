@@ -15,10 +15,6 @@
 			<string></string>
 			<key>CFBundleTypeName</key>
 			<string>Color Set</string>
-			<key>CFBundleTypeOSTypes</key>
-			<array>
-				<string>????</string>
-			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>NSDocumentClass</key>

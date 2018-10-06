@@ -878,7 +878,7 @@
                                                                                         <constraint firstAttribute="height" constant="32" id="ebZ-yg-eAP"/>
                                                                                         <constraint firstAttribute="width" secondItem="eDc-oJ-oRo" secondAttribute="height" multiplier="1:1" id="xAD-L4-d2W"/>
                                                                                     </constraints>
-                                                                                    <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" image="grass_top" id="AdW-4l-3Bo"/>
+                                                                                    <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" image="MissingTexture" id="AdW-4l-3Bo"/>
                                                                                 </imageView>
                                                                                 <textField horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="300" verticalCompressionResistancePriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="yrJ-9T-IaH">
                                                                                     <rect key="frame" x="41" y="12" width="113" height="17"/>
@@ -1713,9 +1713,9 @@ e.g. if the mask is fully opaque on the left and fades to fully transparent on t
         </scene>
     </scenes>
     <resources>
+        <image name="MissingTexture" width="256" height="256"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
-        <image name="grass_top" width="32" height="32"/>
     </resources>
 </document>
