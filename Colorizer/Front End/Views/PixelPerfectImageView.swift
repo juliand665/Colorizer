@@ -2,16 +2,17 @@
 
 import AppKit
 
-/// Scales down with anti-aliasing, up with aliasing
+/// Scales down with anti-aliasing, up without
 @IBDesignable
 class PixelPerfectImageView: NSImageView {
-    
-    override func draw(_ dirtyRect: NSRect) {
-        let prev = NSGraphicsContext.current!.imageInterpolation
-        if let img = image, img.size < frame.size {
-            NSGraphicsContext.current!.imageInterpolation = .none
-        }
-        super.draw(dirtyRect)
-        NSGraphicsContext.current!.imageInterpolation = prev
-    }
+	override func draw(_ dirtyRect: NSRect) {
+		let context = NSGraphicsContext.current!
+		let prev = context.imageInterpolation
+		let scale = window?.backingScaleFactor ?? 1
+		if let image = image, image.size.width < scale * frame.size.width {
+			context.imageInterpolation = .none
+		}
+		super.draw(dirtyRect)
+		context.imageInterpolation = prev
+	}
 }
