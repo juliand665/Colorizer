@@ -5,12 +5,12 @@ import Cocoa
 class ColorizationViewController: NSViewController, LoadedViewController {
 	static let sceneID = NSStoryboard.SceneIdentifier("Colorization")
 	
-	@IBOutlet weak var nameField: NSTextField!
-	@IBOutlet weak var filenameField: NSTextField!
-	@IBOutlet weak var lowColorWell: NSColorWell!
-	@IBOutlet weak var highColorWell: NSColorWell!
-	@IBOutlet weak var gradientView: GradientView!
-	@IBOutlet weak var previewView: NSView!
+	@IBOutlet var nameField: NSTextField!
+	@IBOutlet var filenameField: NSTextField!
+	@IBOutlet var lowColorWell: NSColorWell!
+	@IBOutlet var highColorWell: NSColorWell!
+	@IBOutlet var gradientView: GradientView!
+	@IBOutlet var previewView: NSView!
 	
 	@IBAction func refreshPreview(_ sender: Any? = nil) {
 		let textures = colorSet.textures

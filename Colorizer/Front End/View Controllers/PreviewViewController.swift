@@ -5,8 +5,8 @@ import Cocoa
 class PreviewViewController: NSViewController, LoadedViewController {
 	static let sceneID = NSStoryboard.SceneIdentifier("Preview")
 	
-	@IBOutlet weak var previewView: NSCollectionView!
-	@IBOutlet weak var renderingIndicator: NSProgressIndicator!
+	@IBOutlet var previewView: NSCollectionView!
+	@IBOutlet var renderingIndicator: NSProgressIndicator!
 	
 	var images: [NSImage] = [] {
 		didSet {

@@ -3,10 +3,10 @@
 import Cocoa
 
 class MainViewController: NSViewController {
-	@IBOutlet weak var leftView: NSStackView!
-	@IBOutlet weak var sidebarView: NSOutlineView!
-	@IBOutlet weak var containerView: NSView!
-	@IBOutlet weak var removeButton: NSButton!
+	@IBOutlet var leftView: NSStackView!
+	@IBOutlet var sidebarView: NSOutlineView!
+	@IBOutlet var containerView: NSView!
+	@IBOutlet var removeButton: NSButton!
 	
 	let headers: [Header] = [.colorizations, .textures]
 	

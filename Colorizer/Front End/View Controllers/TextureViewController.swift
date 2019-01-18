@@ -5,16 +5,16 @@ import Cocoa
 class TextureViewController: NSViewController, LoadedViewController {
 	static var sceneID = NSStoryboard.SceneIdentifier("Texture")
 	
-	@IBOutlet weak var nameField: NSTextField!
-	@IBOutlet weak var filenameField: NSTextField!
-	@IBOutlet weak var inputPathControl: NSPathControl!
-	@IBOutlet weak var outputPathControl: NSPathControl!
-	@IBOutlet weak var maskPathControl: NSPathControl!
-	@IBOutlet weak var removeMaskButton: NSButton!
-	@IBOutlet weak var levelsView: TextureLevelsView!
-	@IBOutlet weak var maxSlider: NSSlider!
-	@IBOutlet weak var minSlider: NSSlider!
-	@IBOutlet weak var previewView: NSView!
+	@IBOutlet var nameField: NSTextField!
+	@IBOutlet var filenameField: NSTextField!
+	@IBOutlet var inputPathControl: NSPathControl!
+	@IBOutlet var outputPathControl: NSPathControl!
+	@IBOutlet var maskPathControl: NSPathControl!
+	@IBOutlet var removeMaskButton: NSButton!
+	@IBOutlet var levelsView: TextureLevelsView!
+	@IBOutlet var maxSlider: NSSlider!
+	@IBOutlet var minSlider: NSSlider!
+	@IBOutlet var previewView: NSView!
 	
 	@IBAction func refreshPreview(_ sender: Any? = nil) {
 		let colorizations = colorSet.colorizations
