@@ -3,7 +3,7 @@
 import Cocoa
 
 class ColorizationViewController: NSViewController, LoadedViewController {
-	static let sceneID = NSStoryboard.SceneIdentifier("Colorization")
+	static let sceneID = "Colorization"
 	
 	@IBOutlet var nameField: NSTextField!
 	@IBOutlet var filenameField: NSTextField!
@@ -34,12 +34,12 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 	var previewViewController: PreviewViewController!
 	var colorization: Colorization! {
 		didSet {
-			nameField.bind(.value, to: colorization, withKeyPath: #keyPath(Colorization.name))
-			filenameField.bind(.value, to: colorization, withKeyPath: #keyPath(Colorization.filename))
-			lowColorWell.bind(.value, to: colorization, withKeyPath: #keyPath(Colorization.low))
-			highColorWell.bind(.value, to: colorization, withKeyPath: #keyPath(Colorization.high))
-			gradientView.bind(.leftColor, to: colorization, withKeyPath: #keyPath(Colorization.low))
-			gradientView.bind(.rightColor, to: colorization, withKeyPath: #keyPath(Colorization.high))
+			nameField.bind(.value, to: colorization!, withKeyPath: #keyPath(Colorization.name))
+			filenameField.bind(.value, to: colorization!, withKeyPath: #keyPath(Colorization.filename))
+			lowColorWell.bind(.value, to: colorization!, withKeyPath: #keyPath(Colorization.low))
+			highColorWell.bind(.value, to: colorization!, withKeyPath: #keyPath(Colorization.high))
+			gradientView.bind(.leftColor, to: colorization!, withKeyPath: #keyPath(Colorization.low))
+			gradientView.bind(.rightColor, to: colorization!, withKeyPath: #keyPath(Colorization.high))
 			lowObservation = colorization.observe(\.low) { [unowned self] (_, _) in
 				self.refreshPreview()
 			}
@@ -54,7 +54,7 @@ class ColorizationViewController: NSViewController, LoadedViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		previewViewController = storyboard!.instantiate(PreviewViewController.self)
-		addChildViewController(previewViewController)
+		addChild(previewViewController)
 		previewView.addSubview(previewViewController.view)
 		previewViewController.view.frame = previewView.bounds
 		previewViewController.view.autoresizingMask = [.width, .height]

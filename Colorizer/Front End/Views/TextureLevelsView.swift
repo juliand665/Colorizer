@@ -26,7 +26,7 @@ class TextureLevelsView: NSView {
 				rect.fill()
 				let edge = NSBezierPath(rect: rect)
 				edge.lineWidth = 0.2
-				edge.lineJoinStyle = .miterLineJoinStyle
+				edge.lineJoinStyle = .miter
 				edge.stroke()
 			}
 			x += width

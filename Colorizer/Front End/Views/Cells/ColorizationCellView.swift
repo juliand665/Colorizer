@@ -10,7 +10,7 @@ class ColorizationCellView: NSTableCellView, Reusable {
 	
 	var colorization: Colorization! {
 		didSet {
-			nameLabel.bind(.value, to: colorization, withKeyPath: #keyPath(Colorization.name))
+			nameLabel.bind(.value, to: colorization!, withKeyPath: #keyPath(Colorization.name))
 			colorView.colorization = colorization
 		}
 	}
@@ -28,6 +28,7 @@ class ColorizationView: NSView {
 			highObservation = colorization.observe(\.high) { [unowned self] (_, _) in
 				self.setNeedsDisplay(self.bounds)
 			}
+			setNeedsDisplay(bounds)
 		}
 	}
 	

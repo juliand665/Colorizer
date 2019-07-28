@@ -13,7 +13,7 @@ class SidebarView: NSOutlineView {
 	}
 	
 	func pngURL(from info: NSDraggingInfo) -> URL? {
-		guard let path = info.draggingPasteboard().filePath
+		guard let path = info.draggingPasteboard.filePath
 			else { return nil }
 		let url = URL(fileURLWithPath: path)
 		guard url.pathExtension == "png"

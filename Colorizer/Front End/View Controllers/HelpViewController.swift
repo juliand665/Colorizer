@@ -3,5 +3,5 @@
 import Cocoa
 
 class HelpViewController: NSViewController, LoadedViewController {
-	static var sceneID = NSStoryboard.SceneIdentifier("Help")
+	static var sceneID = "Help"
 }

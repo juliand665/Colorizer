@@ -3,6 +3,9 @@
 import Cocoa
 import Bitmap
 
+// the things you do for bindings…
+private var isSetting = false
+
 @objcMembers
 class Texture: NSObject, Codable {
 	dynamic var name: String
@@ -28,8 +31,32 @@ class Texture: NSObject, Codable {
 	}
 	dynamic var maskImage: NSImage?
 	dynamic var levels: [CGFloat]!
-	dynamic var mapDomainMin: CGFloat = 0.0
-	dynamic var mapDomainMax: CGFloat = 1.0
+	
+	dynamic var mapDomainMin: CGFloat = 0 {
+		didSet {
+			guard !isSetting else { return }
+			isSetting = true
+			mapDomainMinOptional = mapDomainMin as NSNumber
+			isSetting = false
+		}
+	}
+	dynamic var mapDomainMinOptional: NSNumber? {
+		get { return mapDomainMin as NSNumber }
+		set { mapDomainMin = CGFloat(newValue?.floatValue ?? 0) }
+	}
+	
+	dynamic var mapDomainMax: CGFloat = 1 {
+		didSet {
+			guard !isSetting else { return }
+			isSetting = true
+			mapDomainMaxOptional = mapDomainMax as NSNumber
+			isSetting = false
+		}
+	}
+	@objc dynamic var mapDomainMaxOptional: NSNumber? {
+		get { return mapDomainMax as NSNumber }
+		set { mapDomainMax = CGFloat(newValue?.floatValue ?? 1) }
+	}
 	
 	init(named name: String, at path: URL, outputtingTo outputPath: URL) {
 		self.name = name

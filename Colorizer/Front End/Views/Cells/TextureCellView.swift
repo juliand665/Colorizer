@@ -10,8 +10,8 @@ class TextureCellView: NSTableCellView, Reusable {
 	
 	var texture: Texture! {
 		didSet {
-			nameLabel.bind(.value, to: texture, withKeyPath: #keyPath(Texture.name))
-			iconView.bind(.image, to: texture, withKeyPath: #keyPath(Texture.image))
+			nameLabel.bind(.value, to: texture!, withKeyPath: #keyPath(Texture.name))
+			iconView.bind(.image, to: texture!, withKeyPath: #keyPath(Texture.image))
 		}
 	}
 }

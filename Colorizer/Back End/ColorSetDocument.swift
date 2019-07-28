@@ -28,8 +28,8 @@ class ColorSetDocument: NSDocument {
 	}
 	
 	override func makeWindowControllers() {
-		let storyboard = NSStoryboard(name: .init("Main"), bundle: nil)
-		let controller = storyboard.instantiateController(withIdentifier: .init("Color Set Window Controller")) as! WindowController
+		let storyboard = NSStoryboard(name: "Main", bundle: nil)
+		let controller = storyboard.instantiateController(withIdentifier: "Color Set Window Controller") as! WindowController
 		self.addWindowController(controller)
 	}
 	

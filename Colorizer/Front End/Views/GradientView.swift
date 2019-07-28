@@ -21,8 +21,8 @@ class GradientView: NSView {
 		
 		let edge = NSBezierPath()
 		edge.appendRect(bounds)
-		edge.lineCapStyle = .squareLineCapStyle
-		edge.lineJoinStyle = .miterLineJoinStyle
+		edge.lineCapStyle = .square
+		edge.lineJoinStyle = .miter
 		
 		edge.lineWidth = 2
 		NSColor.controlBackgroundColor.set() // next color is semi-transparent

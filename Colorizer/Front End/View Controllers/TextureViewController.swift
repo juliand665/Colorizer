@@ -3,7 +3,7 @@
 import Cocoa
 
 class TextureViewController: NSViewController, LoadedViewController {
-	static var sceneID = NSStoryboard.SceneIdentifier("Texture")
+	static var sceneID = "Texture"
 	
 	@IBOutlet var nameField: NSTextField!
 	@IBOutlet var filenameField: NSTextField!
@@ -14,6 +14,10 @@ class TextureViewController: NSViewController, LoadedViewController {
 	@IBOutlet var levelsView: TextureLevelsView!
 	@IBOutlet var maxSlider: NSSlider!
 	@IBOutlet var minSlider: NSSlider!
+	@IBOutlet var maxField: NSTextField!
+	@IBOutlet var minField: NSTextField!
+	@IBOutlet var copyBoundsButton: NSButton!
+	@IBOutlet var pasteBoundsButton: NSButton!
 	@IBOutlet var previewView: NSView!
 	
 	@IBAction func refreshPreview(_ sender: Any? = nil) {
@@ -48,6 +52,31 @@ class TextureViewController: NSViewController, LoadedViewController {
 		}
 	}
 	
+	@IBAction func copyBounds(_ sender: Any) {
+		NSPasteboard.general.clearContents()
+		NSPasteboard.general.setString("\(texture.mapDomainMin)\t\(texture.mapDomainMax)", forType: .tabularText)
+	}
+	
+	@IBAction func pasteBounds(_ sender: Any) {
+		guard
+			let strings = NSPasteboard.general.string(forType: .tabularText)?.components(separatedBy: "\t"),
+			strings.count == 2,
+			let min = Double(strings[0]),
+			let max = Double(strings[1])
+			else {
+				let alert = NSAlert()
+				alert.alertStyle = .warning
+				alert.messageText = "Could not read bounds from clipboard!"
+				alert.informativeText = "Please ensure you copied data in the correct format—the easiest way is to use the copy button just to the left of the one you just pressed."
+				alert.runModal()
+				return
+		}
+		
+		texture.mapDomainMin = CGFloat(min)
+		texture.mapDomainMax = CGFloat(max)
+		refreshPreview()
+	}
+	
 	@IBAction func colorizeAndSave(_ sender: Any? = nil) {
 		colorSet.colorizeUsingAll(texture)
 	}
@@ -79,13 +108,15 @@ class TextureViewController: NSViewController, LoadedViewController {
 	var texture: Texture! {
 		didSet {
 			levelsView.texture = texture
-			nameField        .bind(.value, to: texture, withKeyPath: #keyPath(Texture.name))
-			filenameField    .bind(.value, to: texture, withKeyPath: #keyPath(Texture.filename))
-			maxSlider        .bind(.value, to: texture, withKeyPath: #keyPath(Texture.mapDomainMax))
-			minSlider        .bind(.value, to: texture, withKeyPath: #keyPath(Texture.mapDomainMin))
-			inputPathControl .bind(.value, to: texture, withKeyPath: #keyPath(Texture.path))
-			outputPathControl.bind(.value, to: texture, withKeyPath: #keyPath(Texture.outputPath))
-			maskPathControl  .bind(.value, to: texture, withKeyPath: #keyPath(Texture.maskPath), options: [.nullPlaceholder: "No Mask Set"])
+			nameField        .bind(.value, to: texture!, withKeyPath: #keyPath(Texture.name))
+			filenameField    .bind(.value, to: texture!, withKeyPath: #keyPath(Texture.filename))
+			maxSlider        .bind(.value, to: texture!, withKeyPath: #keyPath(Texture.mapDomainMax))
+			minSlider        .bind(.value, to: texture!, withKeyPath: #keyPath(Texture.mapDomainMin))
+			maxField         .bind(.value, to: texture!, withKeyPath: #keyPath(Texture.mapDomainMaxOptional))
+			minField         .bind(.value, to: texture!, withKeyPath: #keyPath(Texture.mapDomainMinOptional))
+			inputPathControl .bind(.value, to: texture!, withKeyPath: #keyPath(Texture.path))
+			outputPathControl.bind(.value, to: texture!, withKeyPath: #keyPath(Texture.outputPath))
+			maskPathControl  .bind(.value, to: texture!, withKeyPath: #keyPath(Texture.maskPath), options: [.nullPlaceholder: "No Mask Set"])
 			imageObservation = texture.observe(\.image) { [unowned self] (_, _) in
 				self.refreshPreview()
 			}
@@ -118,7 +149,7 @@ class TextureViewController: NSViewController, LoadedViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		previewViewController = storyboard!.instantiate(PreviewViewController.self)
-		addChildViewController(previewViewController)
+		addChild(previewViewController)
 		previewView.addSubview(previewViewController.view)
 		previewViewController.view.frame = previewView.bounds
 		previewViewController.view.autoresizingMask = [.width, .height]
@@ -126,9 +157,9 @@ class TextureViewController: NSViewController, LoadedViewController {
 }
 
 class FilenameHelpViewController: NSViewController, LoadedViewController {
-	static let sceneID = NSStoryboard.SceneIdentifier("Filename Help")
+	static let sceneID = "Filename Help"
 }
 
 class MaskHelpViewController: NSViewController, LoadedViewController {
-	static let sceneID = NSStoryboard.SceneIdentifier("Mask Help")
+	static let sceneID = "Mask Help"
 }

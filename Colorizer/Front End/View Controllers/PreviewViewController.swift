@@ -3,7 +3,7 @@
 import Cocoa
 
 class PreviewViewController: NSViewController, LoadedViewController {
-	static let sceneID = NSStoryboard.SceneIdentifier("Preview")
+	static let sceneID = "Preview"
 	
 	@IBOutlet var previewView: NSCollectionView!
 	@IBOutlet var renderingIndicator: NSProgressIndicator!
@@ -43,7 +43,7 @@ class PreviewViewController: NSViewController, LoadedViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		previewView.register(NSNib(nibNamed: .init("PreviewItem"), bundle: nil), forItemWithIdentifier: PreviewItem.reuseID)
+		previewView.register(NSNib(nibNamed: "PreviewItem", bundle: nil), forItemWithIdentifier: PreviewItem.reuseID)
 	}
 	
 	func prepare() {

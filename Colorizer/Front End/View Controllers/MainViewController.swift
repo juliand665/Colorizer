@@ -13,11 +13,11 @@ class MainViewController: NSViewController {
 	var containedViewController: NSViewController? {
 		willSet {
 			containedViewController?.view.removeFromSuperview()
-			containedViewController?.removeFromParentViewController()
+			containedViewController?.removeFromParent()
 		}
 		didSet {
 			if let new = containedViewController {
-				addChildViewController(new)
+				addChild(new)
 				containerView.addSubview(new.view)
 				new.view.frame = containerView.bounds
 				new.view.autoresizingMask = [.width, .height]

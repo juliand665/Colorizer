@@ -22,8 +22,6 @@
 		956FAFA2216930FA00537324 /* DocumentIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 956FAFA1216930FA00537324 /* DocumentIcon.icns */; };
 		957BC5CA2033C85A00ABF7BB /* TextureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957BC5C92033C85A00ABF7BB /* TextureViewController.swift */; };
 		957BC5CC2034993C00ABF7BB /* TextureLevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957BC5CB2034993C00ABF7BB /* TextureLevelsView.swift */; };
-		957BC5CE2034BE3B00ABF7BB /* Bitmap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957BC5CD2034BE3B00ABF7BB /* Bitmap.framework */; };
-		957BC5CF2034BE3B00ABF7BB /* Bitmap.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 957BC5CD2034BE3B00ABF7BB /* Bitmap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		957BC5D22034BF5800ABF7BB /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957BC5D12034BF5800ABF7BB /* Texture.swift */; };
 		957BC5D42034BF6A00ABF7BB /* Colorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957BC5D32034BF6900ABF7BB /* Colorization.swift */; };
 		957BC5D62034DADE00ABF7BB /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957BC5D52034DADE00ABF7BB /* GradientView.swift */; };
@@ -35,20 +33,6 @@
 		95EC77ED203896DD00291145 /* DiscardingQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC77EC203896DD00291145 /* DiscardingQueue.swift */; };
 		95EC77F12038B15E00291145 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC77F02038B15E00291145 /* PreviewViewController.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		957BC5D02034BE3B00ABF7BB /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				957BC5CF2034BE3B00ABF7BB /* Bitmap.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		952828DE1EB9F7F20028149E /* Colorizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,7 +71,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				957BC5CE2034BE3B00ABF7BB /* Bitmap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +178,6 @@
 				952828DA1EB9F7F20028149E /* Sources */,
 				952828DB1EB9F7F20028149E /* Frameworks */,
 				952828DC1EB9F7F20028149E /* Resources */,
-				957BC5D02034BE3B00ABF7BB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -213,13 +195,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Julian Dunskus";
 				TargetAttributes = {
 					952828DD1EB9F7F20028149E = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = V2EPDFA9PV;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -231,7 +213,7 @@
 			};
 			buildConfigurationList = 952828D91EB9F7F20028149E /* Build configuration list for PBXProject "Colorizer" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -308,6 +290,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -366,6 +349,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -416,6 +400,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = V2EPDFA9PV;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -427,7 +412,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.juliand665.Colorizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -435,6 +420,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = V2EPDFA9PV;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -446,7 +432,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.juliand665.Colorizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
