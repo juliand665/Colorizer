@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,7 @@
 		9557FD13202FD95200F9FA6B /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9557FD12202FD95200F9FA6B /* Helpers.swift */; };
 		956568BB1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956568BA1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift */; };
 		956FAFA2216930FA00537324 /* DocumentIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 956FAFA1216930FA00537324 /* DocumentIcon.icns */; };
+		957612A122F9D3FD0094A364 /* Bitmap in Frameworks */ = {isa = PBXBuildFile; productRef = 957612A022F9D3FD0094A364 /* Bitmap */; };
 		957BC5CA2033C85A00ABF7BB /* TextureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957BC5C92033C85A00ABF7BB /* TextureViewController.swift */; };
 		957BC5CC2034993C00ABF7BB /* TextureLevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957BC5CB2034993C00ABF7BB /* TextureLevelsView.swift */; };
 		957BC5D22034BF5800ABF7BB /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957BC5D12034BF5800ABF7BB /* Texture.swift */; };
@@ -53,7 +54,6 @@
 		956FAFA1216930FA00537324 /* DocumentIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = DocumentIcon.icns; path = Design/DocumentIcon.icns; sourceTree = SOURCE_ROOT; };
 		957BC5C92033C85A00ABF7BB /* TextureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureViewController.swift; sourceTree = "<group>"; };
 		957BC5CB2034993C00ABF7BB /* TextureLevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureLevelsView.swift; sourceTree = "<group>"; };
-		957BC5CD2034BE3B00ABF7BB /* Bitmap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bitmap.framework; path = Carthage/Build/Mac/Bitmap.framework; sourceTree = "<group>"; };
 		957BC5D12034BF5800ABF7BB /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
 		957BC5D32034BF6900ABF7BB /* Colorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colorization.swift; sourceTree = "<group>"; };
 		957BC5D52034DADE00ABF7BB /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -71,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				957612A122F9D3FD0094A364 /* Bitmap in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +81,6 @@
 		952828D51EB9F7F20028149E = {
 			isa = PBXGroup;
 			children = (
-				957BC5CD2034BE3B00ABF7BB /* Bitmap.framework */,
 				952828E01EB9F7F20028149E /* Colorizer */,
 				952828DF1EB9F7F20028149E /* Products */,
 			);
@@ -184,6 +184,9 @@
 			dependencies = (
 			);
 			name = Colorizer;
+			packageProductDependencies = (
+				957612A022F9D3FD0094A364 /* Bitmap */,
+			);
 			productName = Colorizer;
 			productReference = 952828DE1EB9F7F20028149E /* Colorizer.app */;
 			productType = "com.apple.product-type.application";
@@ -220,6 +223,9 @@
 				Base,
 			);
 			mainGroup = 952828D51EB9F7F20028149E;
+			packageReferences = (
+				9576129F22F9D3FC0094A364 /* XCRemoteSwiftPackageReference "Bitmap" */,
+			);
 			productRefGroup = 952828DF1EB9F7F20028149E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -392,7 +398,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -408,7 +415,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = Colorizer/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.juliand665.Colorizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -428,7 +438,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = Colorizer/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.juliand665.Colorizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -458,6 +471,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9576129F22F9D3FC0094A364 /* XCRemoteSwiftPackageReference "Bitmap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/juliand665/Bitmap.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		957612A022F9D3FD0094A364 /* Bitmap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9576129F22F9D3FC0094A364 /* XCRemoteSwiftPackageReference "Bitmap" */;
+			productName = Bitmap;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 952828D61EB9F7F20028149E /* Project object */;
 }

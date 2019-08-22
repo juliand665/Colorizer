@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Bitmap",
+        "repositoryURL": "https://github.com/juliand665/Bitmap.git",
+        "state": {
+          "branch": null,
+          "revision": "2c78b88fa99b552636957aaee16e6b0085bdf107",
+          "version": "2.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
