@@ -51,7 +51,7 @@
 		9550A0D5201F7E4F00BAF7EE /* Colorizer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Colorizer.entitlements; sourceTree = "<group>"; };
 		9557FD12202FD95200F9FA6B /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		956568BA1EDCFA6A00F8E6BE /* PixelPerfectImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelPerfectImageView.swift; sourceTree = "<group>"; };
-		956FAFA1216930FA00537324 /* DocumentIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = DocumentIcon.icns; path = Design/DocumentIcon.icns; sourceTree = SOURCE_ROOT; };
+		956FAFA1216930FA00537324 /* DocumentIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = DocumentIcon.icns; path = Resources/DocumentIcon.icns; sourceTree = SOURCE_ROOT; };
 		957BC5C92033C85A00ABF7BB /* TextureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureViewController.swift; sourceTree = "<group>"; };
 		957BC5CB2034993C00ABF7BB /* TextureLevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureLevelsView.swift; sourceTree = "<group>"; };
 		957BC5D12034BF5800ABF7BB /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
