@@ -98,13 +98,19 @@ class Texture: NSObject, Codable {
 	
 	func computeLevels() {
 		let bitmap = Bitmap(from: image.cgImage())
-		var colors = AnySequence(bitmap.pixels.lazy.map { $0.nsColor })
+		var colors = AnySequence(
+			bitmap.pixels
+				.lazy
+				.filter { $0.alpha > 0 }
+				.map { $0.nsColor }
+		)
 		if let maskImage = maskImage {
 			let mask = Bitmap(from: maskImage.cgImage())
-			colors = AnySequence(zip(colors, mask.pixels)
-				.lazy
-				.filter { $0.1.alpha > 0 }
-				.map { $0.0 }
+			colors = AnySequence(
+				zip(colors, mask.pixels)
+					.lazy
+					.filter { $0.1.alpha > 0 }
+					.map { $0.0 }
 			)
 		}
 		var histogram = [Int](repeating: 0, count: 256)
