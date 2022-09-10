@@ -85,10 +85,12 @@ class Texture: NSObject, Codable {
 	}
 	
 	func loadMask() {
-		if let path = maskPath,
+		if
+			let path = maskPath,
 			let mask = NSImage(contentsOf: path),
 			mask.isValid,
-			mask.size == image.size {
+			mask.size == image.size
+		{
 			maskImage = mask
 		} else {
 			maskImage = nil
@@ -98,24 +100,23 @@ class Texture: NSObject, Codable {
 	
 	func computeLevels() {
 		let bitmap = Bitmap(from: image.cgImage())
-		var colors = AnySequence(
-			bitmap.pixels
-				.lazy
-				.filter { $0.alpha > 0 }
-				.map { $0.nsColor }
-		)
+		var pixels = AnySequence(bitmap.pixels)
 		if let maskImage = maskImage {
 			let mask = Bitmap(from: maskImage.cgImage())
-			colors = AnySequence(
-				zip(colors, mask.pixels)
+			pixels = AnySequence(
+				zip(pixels, mask.pixels)
 					.lazy
 					.filter { $0.1.alpha > 0 }
 					.map { $0.0 }
 			)
 		}
+		let colors = pixels
+			.lazy
+			.filter { $0.alpha > 0 }
+			.map { $0.nsColor }
 		var histogram = [Int](repeating: 0, count: 256)
 		for color in colors {
-			histogram[Int(255 * color.brightnessComponent)] += 1
+			histogram[Int(255 * color.intensity)] += 1
 		}
 		let maximum = CGFloat(histogram.max()!)
 		levels = histogram.map { CGFloat($0) / maximum }
@@ -130,7 +131,7 @@ class Texture: NSObject, Codable {
 		for y in 0..<bitmap.height {
 			for x in 0..<bitmap.width {
 				let prev = bitmap[x, y].nsColor
-				let clamped = max(0, prev.brightnessComponent - low)
+				let clamped = max(0, prev.intensity - low)
 				let factor = min(1, clamped / dist)
 				var new = gradient.interpolatedColor(atLocation: factor)
 				if let mask = mask {
@@ -144,6 +145,12 @@ class Texture: NSObject, Codable {
 	}
 }
 
+extension NSColor {
+	var intensity: CGFloat {
+		(redComponent + greenComponent + blueComponent) / 3
+	}
+}
+
 extension FloatingPoint {
 	func interpolate(zero: Self, one: Self) -> Self {
 		return zero + self * (one - zero)
@@ -152,9 +159,11 @@ extension FloatingPoint {
 
 extension CGFloat {
 	func interpolate(zero: NSColor, one: NSColor) -> NSColor {
-		return NSColor(red:   interpolate(zero: zero.redComponent,   one: one.redComponent),
-					   green: interpolate(zero: zero.greenComponent, one: one.greenComponent),
-					   blue:  interpolate(zero: zero.blueComponent,  one: one.blueComponent),
-					   alpha: interpolate(zero: zero.alphaComponent, one: one.alphaComponent))
+		return NSColor(
+			red:   interpolate(zero: zero.redComponent,   one: one.redComponent),
+			green: interpolate(zero: zero.greenComponent, one: one.greenComponent),
+			blue:  interpolate(zero: zero.blueComponent,  one: one.blueComponent),
+			alpha: interpolate(zero: zero.alphaComponent, one: one.alphaComponent)
+		)
 	}
 }
